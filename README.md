@@ -1,6 +1,6 @@
 # Pass_keeper
 
-
+It should include an opportunity to connect to local networks, share unique identificator of its instance and share the passwords with other devices if an entered password is valid
 
 ## Getting started
 
