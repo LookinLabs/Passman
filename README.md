@@ -1,6 +1,5 @@
 # Pass_keeper
-
-It should include an opportunity to connect to local networks, share unique identificator of its instance and share the passwords with other devices if an entered password is valid
+It should include an opportunity to store passwords, connect to local networks, share unique identificator of its instance and share the passwords with other devices if an entered password is valid, have a possibility to generate random secure password, search by site name and password values, control if some passwords similarity
 
 ## Getting started
 
