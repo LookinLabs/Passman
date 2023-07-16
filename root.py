@@ -19,6 +19,11 @@ def get_password(*args):
     password.set(password_value)
 
 
+def clear_password():
+
+    password.set("")
+
+
 x_coordinate = 600
 
 y_coordinate = 400
@@ -79,7 +84,7 @@ button_add_password.config(command=add_password)
 button_add_password.place(x=5, y=45, width=50, height=25)
 
 
-button_clear_field = Button(master=frame_password_add, text="Clear")
+button_clear_field = Button(master=frame_password_add, text="Clear", command=clear_password)
 
 button_clear_field.place(x=60, y=45, width=50, height=25)
 
