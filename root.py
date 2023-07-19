@@ -82,7 +82,7 @@ def add_password():
     button_save_password.place(x=5, y=45, width=50, height=25)
 
 
-    button_clear_field = Button(master=frame_password_add, text="Clear", command=clear_password)
+    button_clear_field = Button(master=window_new_password, text="Cancel", command=window_new_password.destroy)
 
     button_clear_field.place(x=60, y=45, width=50, height=25)
 
@@ -93,11 +93,6 @@ def get_password(*args):
     password_value = password_list.get(password_list.curselection())
 
     password.set(password_value)
-
-
-def clear_password():
-
-    password.set("")
 
 
 
