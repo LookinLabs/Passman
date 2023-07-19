@@ -68,9 +68,7 @@ def add_password():
     password_field_label.place(x=5, y=5)
 
 
-    password = StringVar()
-
-    password_field = Entry(master=window_new_password, width=20, textvariable=password)
+    password_field = Entry(master=window_new_password, width=20)
 
     password_field.place(x=5, y=25)
 
@@ -139,6 +137,21 @@ button_add_password = Button(master=frame_password_add, text="Add new password")
 button_add_password.config(command=add_password)
 
 button_add_password.place(x=5, y=5, width=250, height=25)
+
+
+password_field_label = Label(master=frame_password_add, text="Edit password:")
+
+password_field_label.configure(font=("Times New Roman", 12))
+
+password_field_label.place(x=5, y=40)
+
+
+password = StringVar()
+
+password_field = Entry(master=frame_password_add, width=20, textvariable=password)
+
+password_field.place(x=5, y=60)
+
 
 
 close_button = Button(frame_password_add, text="Close", font=("Lora", 13), command=window.destroy)
