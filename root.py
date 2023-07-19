@@ -138,7 +138,7 @@ button_add_password = Button(master=frame_password_add, text="Add new password")
 
 button_add_password.config(command=add_password)
 
-button_add_password.place(x=5, y=45, width=250, height=25)
+button_add_password.place(x=5, y=5, width=250, height=25)
 
 
 close_button = Button(frame_password_add, text="Close", font=("Lora", 13), command=window.destroy)
