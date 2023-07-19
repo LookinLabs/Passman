@@ -8,7 +8,50 @@ window.title("Pass Keeper")
 
 def add_password():
 
+    window_new_password = Tk()
+
+    window_new_password.title("New password")
+
+    window_new_password_x = 320
+
+    window_new_password_y = 200
+
+    window_new_password.geometry(f"{window_new_password_x}x{window_new_password_y}")
+
+    window_new_password.resizable(False, False)
+
+
     password_list.insert(END, password_field.get())
+
+    window_message = Tk()
+
+    window_message.title("Notification")
+
+    window_message_x = 320
+
+    window_message_y = 200
+
+    window_message.geometry(f"{window_message_x}x{window_message_y}")
+
+    window_message.resizable(False, False)
+
+
+    message_label = Label(master=window_message, text="Password successfully added!", relief=GROOVE)
+
+    message_label_width = 300
+
+    message_label.place(x=window_message_x /  2 - message_label_width / 2, y=10, width=message_label_width, height=40)
+
+
+    message_button = Button(master=window_message, text="Ok")
+
+    message_button.config(command=window_message.destroy)
+
+    message_button_width = 100
+
+    message_button.place(x=window_message_x /  2 - message_button_width / 2, y=20, width=message_button_width, height=60)
+
+    message_button.mainloop()
 
 
 
@@ -35,7 +78,7 @@ window.resizable(False, False)
 
 frame_password_list = Frame(master=window, bd=3, relief=GROOVE)
 
-frame_password_list.place(x=5, y=5, width=x_coordinate / 2, height=y_coordinate - 10)
+frame_password_list.place(x=5, y=5, width=x_coordinate / 2 - 20, height=y_coordinate - 10)
 
 frame_password_add = Frame(master=window, bd=3, relief=GROOVE)
 
@@ -59,7 +102,7 @@ password_list.select_set(0)
 
 password_list.bind("<<ListboxSelect>>", get_password)
 
-password_list.place(x=5, y=5, width = x_coordinate / 2 - 10, height=y_coordinate - 10)
+password_list.place(x=5, y=5, width = x_coordinate / 2 - 40, height=y_coordinate - 30)
 
 
 
@@ -100,36 +143,3 @@ close_button_x = x_coordinate / 2 - 200
 close_button.place(x=close_button_x, y=y_coordinate - 50, width=close_button_width, height=close_button_height)
 
 window.mainloop()
-
-
-if len(saved_passwords) > 0:
-
-    window_message = Tk()
-
-    window_message.title("Notification")
-
-    window_message_x = 320
-
-    window_message_y = 200
-
-    window_message.geometry(f"{window_message_x}x{window_message_y}")
-
-    window_message.resizable(False, False)
-
-
-    message_label = Label(master=window_message, text="Password successfully added!", relief=GROOVE)
-
-    message_label_width = 300
-
-    message_label.place(x=window_message_x /  2 - message_label_width / 2, y=10, width=message_label_width, height=40)
-
-
-    message_button = Button(master=window_message, text="Ok")
-
-    message_button.config(command=window_message.destroy)
-
-    message_button_width = 100
-
-    message_button.place(x=window_message_x /  2 - message_button_width / 2, y=20, width=message_button_width, height=60)
-
-    message_button.mainloop()
