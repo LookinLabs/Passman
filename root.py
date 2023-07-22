@@ -45,9 +45,9 @@ def add_password():
 
         message_button.config(command=window_message.destroy)
 
-        message_button_width = 100
+        message_button_width = 70
 
-        message_button.place(x=window_message_x /  2 - message_button_width / 2, y=20, width=message_button_width, height=60)
+        message_button.place(x=window_message_x /  2 - message_button_width / 2, y=100, width=message_button_width, height=45)
 
         window_message.mainloop()
 
@@ -65,7 +65,7 @@ def add_password():
     window_new_password.resizable(False, False)
 
 
-    password_name_label = Label(master=window_new_password, text="Enter your password name(usually it's a domain address):")
+    password_name_label = Label(master=window_new_password, text="Enter your password's name(usually it's a domain address):")
 
     password_name_label.configure(font=("Times New Roman", 12))
 
@@ -81,24 +81,24 @@ def add_password():
 
     password_field_label.configure(font=("Times New Roman", 12))
 
-    password_field_label.place(x=5, y=40)
+    password_field_label.place(x=5, y=50)
 
 
     password_field = Entry(master=window_new_password, width=20)
 
-    password_field.place(x=5, y=65)
+    password_field.place(x=5, y=70)
 
 
     button_save_password = Button(master=window_new_password, text="Save")
 
     button_save_password.config(command=save_new_password)
 
-    button_save_password.place(x=5, y=45, width=50, height=25)
+    button_save_password.place(x=5, y=95, width=50, height=25)
 
 
     button_clear_field = Button(master=window_new_password, text="Cancel", command=window_new_password.destroy)
 
-    button_clear_field.place(x=60, y=45, width=50, height=25)
+    button_clear_field.place(x=60, y=95, width=50, height=25)
 
 
 
