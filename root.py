@@ -115,6 +115,34 @@ def delete_password(*args):
 
     password_value_index = saved_passwords.index(password_field_value)
 
+
+    window_delete_password = Tk()
+
+    window_delete_password.title("Password deletion")
+
+    window_delete_password_x = 320
+
+    window_delete_password_y = 200
+
+    window_delete_password.geometry(f"{window_delete_password_x}x{window_delete_password_y}")
+
+    window_delete_password.resizable(False, False)
+
+
+    label_delete_password = Label(master=window_delete_password, text=f"Are you sure you want to delete password '{saved_passwords_names[password_value_index]}'?", relief=GROOVE)
+
+    label_delete_password_width = 300
+
+    label_delete_password.place(x=window_delete_password_x /  2 - label_delete_password_width / 2, y=10, width=label_delete_password_width, height=40)
+
+
+    button_save_password = Button(master=window_delete_password, text="Yes!")
+
+    button_save_password.config(command=window_delete_password.destroy) #continue coding from here!
+
+    button_save_password.place(x=5, y=95, width=50, height=25)
+
+
     password_list.delete(password_value_index)
 
     saved_passwords_names.pop(password_value_index)
