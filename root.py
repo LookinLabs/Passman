@@ -17,7 +17,6 @@ def add_password():
 
         saved_passwords.append(password_field.get())
 
-
         window_new_password.destroy()
 
     
@@ -101,7 +100,6 @@ def add_password():
     button_clear_field.place(x=60, y=95, width=50, height=25)
 
 
-
 def get_password(*args):
 
     password_name_value = password_list.get(password_list.curselection())
@@ -110,6 +108,18 @@ def get_password(*args):
 
     password.set(saved_passwords[password_value_index])
 
+
+def delete_password(*args):
+
+    password_field_value = password.get()
+
+    password_value_index = saved_passwords.index(password_field_value)
+
+    password_list.delete(password_value_index)
+
+    saved_passwords_names.pop(password_value_index)
+
+    saved_passwords.pop(password_value_index)
 
 
 x_coordinate = 600
@@ -171,6 +181,12 @@ password_field = Entry(master=frame_password_add, width=20, show="*", textvariab
 
 password_field.place(x=5, y=60)
 
+
+button_delete_password = Button(master=frame_password_add, text="Delete")
+
+button_delete_password.config(command=delete_password)
+
+button_delete_password.place(x=200, y=60)
 
 
 close_button = Button(frame_password_add, text="Close", font=("Lora", 13), command=window.destroy)
