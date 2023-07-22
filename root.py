@@ -70,8 +70,11 @@ def add_password():
 
     password = StringVar()
 
+<<<<<<< HEAD
     password_field = Entry(master=window_new_password, width=20, textvariable=password)
 
+=======
+>>>>>>> 69bb5347d0123bfb1dbbd08a47fdd394a8921fae
     password_field.place(x=5, y=25)
 
 
