@@ -11,8 +11,12 @@ def add_password():
 
     def save_new_password():
 
-        password_list.insert(END, password_field.get())
-        
+        saved_passwords_names.append(password_name.get())
+
+        password_list.insert(END, password_name.get())
+
+        saved_passwords.append(password_field.get())
+
 
         window_new_password.destroy()
 
@@ -61,21 +65,28 @@ def add_password():
     window_new_password.resizable(False, False)
 
 
+    password_name_label = Label(master=window_new_password, text="Enter your password name(usually it's a domain address):")
+
+    password_name_label.configure(font=("Times New Roman", 12))
+
+    password_name_label.place(x=5, y=5)
+
+
+    password_name = Entry(master=window_new_password, width=20)
+
+    password_name.place(x=5, y=25)
+
+
     password_field_label = Label(master=window_new_password, text="Enter your password:")
 
     password_field_label.configure(font=("Times New Roman", 12))
 
-    password_field_label.place(x=5, y=5)
+    password_field_label.place(x=5, y=40)
 
 
-    password = StringVar()
+    password_field = Entry(master=window_new_password, width=20)
 
-<<<<<<< HEAD
-    password_field = Entry(master=window_new_password, width=20, textvariable=password)
-
-=======
->>>>>>> 69bb5347d0123bfb1dbbd08a47fdd394a8921fae
-    password_field.place(x=5, y=25)
+    password_field.place(x=5, y=65)
 
 
     button_save_password = Button(master=window_new_password, text="Save")
@@ -93,9 +104,11 @@ def add_password():
 
 def get_password(*args):
 
-    password_value = password_list.get(password_list.curselection())
+    password_name_value = password_list.get(password_list.curselection())
 
-    password.set(password_value)
+    password_value_index = saved_passwords_names.index(password_name_value)
+
+    password.set(saved_passwords[password_value_index])
 
 
 
@@ -117,20 +130,21 @@ frame_password_add = Frame(master=window, bd=3, relief=GROOVE)
 frame_password_add.place(x=x_coordinate / 2, y=5, width=x_coordinate / 2, height=y_coordinate - 10)
 
 
+saved_passwords_names = []
+
 saved_passwords = []
 
 
-password_list = Listbox(master=frame_password_list, listvariable=saved_passwords, selectmode=SINGLE)
+password_list = Listbox(master=frame_password_list, listvariable=saved_passwords_names, selectmode=SINGLE)
 
 password_list.configure(bg="gray96", selectbackground="gray")
 
 password_list.configure(activestyle="none", height=4)
 
-for password in saved_passwords:
+for password in saved_passwords_names:
 
     password_list.insert(END, password)
 
-password_list.select_set(0)
 
 password_list.bind("<<ListboxSelect>>", get_password)
 
@@ -153,9 +167,10 @@ password_field_label.place(x=5, y=40)
 
 password = StringVar()
 
-password_field = Entry(master=frame_password_add, width=20, textvariable=password)
+password_field = Entry(master=frame_password_add, width=20, show="*", textvariable=password)
 
 password_field.place(x=5, y=60)
+
 
 
 close_button = Button(frame_password_add, text="Close", font=("Lora", 13), command=window.destroy)
