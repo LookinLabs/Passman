@@ -8,6 +8,16 @@ window.title("Pass Keeper")
 
 def add_password():
 
+    def show_and_hide_password():
+
+        if new_password_field["show"] == "*":
+
+            new_password_field["show"] = ""
+
+        else:
+
+            new_password_field["show"] = "*"
+
 
     def save_new_password():
 
@@ -83,9 +93,9 @@ def add_password():
     password_field_label.place(x=5, y=50)
 
 
-    password_field = Entry(master=window_new_password, width=20)
+    new_password_field = Entry(master=window_new_password, width=20, show="*")
 
-    password_field.place(x=5, y=70)
+    new_password_field.place(x=5, y=70)
 
 
     button_save_password = Button(master=window_new_password, text="Save")
@@ -98,6 +108,11 @@ def add_password():
     button_clear_field = Button(master=window_new_password, text="Cancel", command=window_new_password.destroy)
 
     button_clear_field.place(x=60, y=95, width=50, height=25)
+
+
+    button_show_password = Button(window_new_password, text="Show", command=show_and_hide_password)
+
+    button_show_password.place(x=window_new_password_x / 3 * 2, y=70, width=50, height=25)
 
 
 def get_password(*args):
