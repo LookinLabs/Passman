@@ -111,6 +111,19 @@ def get_password(*args):
 
 def delete_password(*args):
 
+    def confirm_delete_password():
+
+        password_list.delete(password_value_index)
+
+        saved_passwords_names.pop(password_value_index)
+
+        saved_passwords.pop(password_value_index)
+
+        window_delete_password.destroy()
+
+        password.set("")
+
+
     password_field_value = password.get()
 
     password_value_index = saved_passwords.index(password_field_value)
@@ -138,16 +151,17 @@ def delete_password(*args):
 
     button_save_password = Button(master=window_delete_password, text="Yes!")
 
-    button_save_password.config(command=window_delete_password.destroy) #continue coding from here!
+    button_save_password.config(command=confirm_delete_password)
 
     button_save_password.place(x=5, y=95, width=50, height=25)
 
 
-    password_list.delete(password_value_index)
+    button_save_password = Button(master=window_delete_password, text="Cancel")
 
-    saved_passwords_names.pop(password_value_index)
+    button_save_password.config(command=window_delete_password.destroy)
 
-    saved_passwords.pop(password_value_index)
+    button_save_password.place(x=70, y=95, width=50, height=25)
+
 
 
 x_coordinate = 600
