@@ -219,7 +219,7 @@ password_field_label.place(x=5, y=40)
 
 password = StringVar()
 
-password_field = Entry(master=frame_password_add, width=20, show="*", textvariable=password)
+password_field = Entry(master=frame_password_add, width=20, show="*", textvariable=password, state=DISABLED)
 
 password_field.place(x=5, y=60)
 
