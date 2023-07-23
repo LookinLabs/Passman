@@ -120,7 +120,7 @@ def delete_password(*args):
 
     window_delete_password.title("Password deletion")
 
-    window_delete_password_x = 320
+    window_delete_password_x = 380
 
     window_delete_password_y = 200
 
@@ -131,7 +131,7 @@ def delete_password(*args):
 
     label_delete_password = Label(master=window_delete_password, text=f"Are you sure you want to delete password '{saved_passwords_names[password_value_index]}'?", relief=GROOVE)
 
-    label_delete_password_width = 300
+    label_delete_password_width = 370 
 
     label_delete_password.place(x=window_delete_password_x /  2 - label_delete_password_width / 2, y=10, width=label_delete_password_width, height=40)
 
