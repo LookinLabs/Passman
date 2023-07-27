@@ -110,10 +110,10 @@ def add_password():
     button_save_password.place(x=5, y=95, width=50, height=25)
 
 
-    button_clear_field = Button(
+    button_cancel_password = Button(
         master=window_new_password, text="Cancel", command=window_new_password.destroy)
 
-    button_clear_field.place(x=60, y=95, width=50, height=25)
+    button_cancel_password.place(x=60, y=95, width=50, height=25)
 
 
     button_show_password = Button(
