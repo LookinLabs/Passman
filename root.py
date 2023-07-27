@@ -8,7 +8,7 @@ window.title("Pass Keeper")
 
 def add_password():
 
-    def show_and_hide_password():
+    def show_and_hide_new_password():
 
         if new_password_field["show"] == "*":
 
@@ -116,10 +116,10 @@ def add_password():
     button_cancel_password.place(x=60, y=95, width=50, height=25)
 
 
-    button_show_password = Button(
-        window_new_password, text="Show", command=show_and_hide_password)
+    button_show_new_password = Button(
+        window_new_password, text="Show", command=show_and_hide_new_password)
 
-    button_show_password.place(
+    button_show_new_password.place(
         x=window_new_password_x / 3 * 2, y=70, width=50, height=25)
 
 
@@ -130,6 +130,17 @@ def get_password(*args):
     password_value_index = saved_passwords_names.index(password_name_value)
 
     password.set(saved_passwords[password_value_index])
+
+
+def show_and_hide_password():
+
+    if password_field["show"] == "*":
+
+        password_field["show"] = ""
+
+    else:
+
+        password_field["show"] = "*"
 
 
 def delete_password(*args):
@@ -259,6 +270,13 @@ button_delete_password = Button(master=frame_password_add, text="Delete")
 button_delete_password.config(command=delete_password)
 
 button_delete_password.place(x=200, y=60)
+
+
+button_show_password = Button(
+        frame_password_add, text="Show", command=show_and_hide_password)
+
+button_show_password.place(
+        x=5, y=100, width=50, height=25)
 
 
 close_button = Button(
