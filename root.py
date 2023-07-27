@@ -225,7 +225,6 @@ for password in saved_passwords_names:
 
     password_list.insert(END, password)
 
-
 password_list.bind("<<ListboxSelect>>", get_password)
 
 password_list.place(
