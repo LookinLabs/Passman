@@ -221,10 +221,9 @@ password_list.configure(bg="gray96", selectbackground="gray")
 
 password_list.configure(activestyle="none", height=4)
 
-for password in saved_passwords_names:
+for password_name in saved_passwords_names:
 
-    password_list.insert(END, password)
-
+    password_list.insert(END, password_name)
 
 password_list.bind("<<ListboxSelect>>", get_password)
 
