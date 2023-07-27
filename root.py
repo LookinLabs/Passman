@@ -25,7 +25,7 @@ def add_password():
 
         password_list.insert(END, password_name.get())
 
-        saved_passwords.append(password_field.get())
+        saved_passwords.append(new_password_field.get())
 
         window_new_password.destroy()
 
