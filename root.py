@@ -125,6 +125,8 @@ def add_password():
 
 def get_password(*args):
 
+    global password_value_index
+
     password_name_value = password_list.get(password_list.curselection())
 
     password_value_index = saved_passwords_names.index(password_name_value)
@@ -141,6 +143,14 @@ def show_and_hide_password():
     else:
 
         password_field["show"] = "*"
+
+
+def update_password():
+
+    global password_value_index
+
+    
+
 
 
 def delete_password(*args):
@@ -277,6 +287,13 @@ button_show_password = Button(
 
 button_show_password.place(
         x=5, y=100, width=50, height=25)
+
+
+button_update_password = Button(
+        frame_password_add, text="Update", command=update_password)
+
+button_update_password.place(
+        x=100, y=100, width=60, height=25)
 
 
 close_button = Button(
