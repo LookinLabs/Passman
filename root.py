@@ -21,9 +21,9 @@ def add_password():
 
     def save_new_password():
 
-        saved_passwords_names.append(password_name.get())
+        saved_passwords_names.append(new_password_name.get())
 
-        password_list.insert(END, password_name.get())
+        password_list.insert(END, new_password_name.get())
 
         saved_passwords.append(new_password_field.get())
 
@@ -147,10 +147,23 @@ def show_and_hide_password():
 
 def update_password():
 
-    global password_value_index
+    global current_password_index
 
-    
+    if password_field["state"] == "disabled":
 
+        password_field.config(state="normal")
+
+        button_update_password.config(text="Update")
+
+    else:
+
+        updated_password_value = password_field.get()
+
+        saved_passwords[current_password_index] = updated_password_value
+
+        password_field.config(state="disabled")
+
+        button_update_password.config(text="Edit")
 
 
 def delete_password(*args):
@@ -290,7 +303,7 @@ button_show_password.place(
 
 
 button_update_password = Button(
-        frame_password_add, text="Update", command=update_password)
+        frame_password_add, text="Edit", command=update_password)
 
 button_update_password.place(
         x=100, y=100, width=60, height=25)
@@ -307,6 +320,9 @@ close_button_x = x_coordinate / 2 - 200
 
 close_window_button.place(
     x=close_button_x, y=y_coordinate - 50, width=close_window_button_width, height=close_window_button_height)
+
+
+current_password_index = 0
 
 
 window.mainloop()
