@@ -151,6 +151,8 @@ def update_password():
 
     if password_field["state"] == "disabled":
 
+        button_delete_password.config(state="disabled")
+
         password_field.config(state="normal")
 
         button_update_password.config(text="Update")
@@ -162,6 +164,8 @@ def update_password():
         saved_passwords[current_password_index] = updated_password_value
 
         password_field.config(state="disabled")
+
+        button_delete_password.config(state="normal")
 
         button_update_password.config(text="Edit")
 
