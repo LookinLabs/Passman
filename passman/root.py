@@ -217,16 +217,16 @@ window.geometry(f"{x}x{y}")
 window.resizable(False, False)
 
 
-frame_password_list = Frame(master=window, bd=3, relief=GROOVE)
+frame_password_list = Frame(master=window, bd=frame_border, relief=GROOVE)
 
 frame_password_list.place(
-    x=x_margin, y=y_margin, width=x / 2 - 20, height=height_frame)
+    x=x_margin, y=y_margin, width=width_frame_password_list, height=height_frame)
 
 
-frame_password_add = Frame(master=window, bd=3, relief=GROOVE)
+frame_password_add = Frame(master=window, bd=frame_border, relief=GROOVE)
 
 frame_password_add.place(
-    x=x / 2, y=y_margin, width=x / 2, height=height_frame)
+    x=x_frame_password_add, y=y_margin, width=width_frame_password_add, height=height_frame)
 
 
 saved_passwords_names = []
@@ -247,7 +247,7 @@ for password_name in saved_passwords_names:
 password_list.bind("<<ListboxSelect>>", get_password)
 
 password_list.place(
-    x=x_margin, y=y_margin, width=x / 2 - 40, height=y - 30)
+    x=x_margin, y=y_margin, width=width_password_list, height=height_password_list)
 
 
 button_add_new_password = Button(
@@ -255,50 +255,50 @@ button_add_new_password = Button(
 
 button_add_new_password.config(command=add_password)
 
-button_add_new_password.place(x=x_margin, y=y_margin, width=250, height=25)
+button_add_new_password.place(x=x_margin, y=y_margin, width=200, height=height_button)
 
 
 password_field_label = Label(master=frame_password_add, text="Edit password:")
 
 password_field_label.configure(font=("Times New Roman", 12))
 
-password_field_label.place(x=x_margin, y=40)
+password_field_label.place(x=x_margin, y=y_label_password_field)
 
 
 password_value = StringVar()
 
 password_field = Entry(
-    master=frame_password_add, width=20, show="*", textvariable=password_value, state=DISABLED)
+    master=frame_password_add, width=width_password_field, show="*", textvariable=password_value, state=DISABLED)
 
-password_field.place(x=x_margin, y=60)
+password_field.place(x=x_margin, y=y_password_field)
 
 
 button_delete_password = Button(master=frame_password_add, text="Delete")
 
 button_delete_password.config(command=delete_password)
 
-button_delete_password.place(x=200, y=60)
+button_delete_password.place(x=x_button_delete_password, y=y_password_field, width=width_button, height=height_button)
 
 
 button_show_password = Button(
         frame_password_add, text="Show", command=show_and_hide_password)
 
 button_show_password.place(
-        x=x_margin, y=100, width=50, height=25)
+        x=x_margin, y=y_button_show_password, width=width_button, height=height_button)
 
 
 button_update_password = Button(
         frame_password_add, text="Edit", command=update_password)
 
 button_update_password.place(
-        x=100, y=100, width=60, height=25)
+        x=x_button_update_password, y=y_button_show_password, width=width_button, height=height_button)
 
 
 close_window_button = Button(
     frame_password_add, text="Close", font=("Lora", 13), command=window.destroy)
 
 close_window_button.place(
-    x=x_button_close, y=y - 50, width=width_window_button_close, height=height_window_button_close)
+    x=x_button_close, y=y_button_close, width=width_window_button_close, height=height_window_button_close)
 
 
 current_password_index = 0

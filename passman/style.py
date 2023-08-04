@@ -6,7 +6,35 @@ x_margin = 5
 
 y_margin = 5
 
+width_button = 50
+
+height_button = 24
+
+frame_border = 3
+
+width_frame_password_list = x / 2 - 10
+
+width_password_list = x / 2 - 10
+
+height_password_list = y - 10
+
+x_frame_password_add = x / 2 - 10
+
+width_frame_password_add = x / 2 + 10
+
 height_frame = y - y_margin * 2
+
+y_label_password_field = height_button + 20
+
+y_password_field = y_label_password_field + 20
+
+width_password_field = 24
+
+y_button_show_password = y_password_field + 40
+
+x_button_update_password = x_margin + width_button + 20
+
+x_button_delete_password = width_password_field + 200
 
 x_window_password_new = 320
 
@@ -25,6 +53,8 @@ y_window_message = 200
 width_label_message = 300
 
 x_button_close = x / 2 - 200
+
+y_button_close = y - 50
 
 width_window_button_close = 150
 
