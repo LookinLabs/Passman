@@ -22,11 +22,20 @@ def add_password():
 
     def save_new_password():
 
-        saved_passwords_names.append(new_password_name.get())
+        password_name_value = new_password_name.get()
 
-        password_list.insert(END, new_password_name.get())
+        password_field_value = new_password_field.get()
 
-        saved_passwords.append(new_password_field.get())
+        saved_passwords_names.append(password_name_value)
+
+        password_list.insert(END, password_name_value)
+
+        saved_passwords.append(password_field_value)
+
+
+        with open("passman.txt", "at") as data:
+
+            data.write(f"{password_name_value}:{password_field_value}\n")
 
         window_new_password.destroy()
 
