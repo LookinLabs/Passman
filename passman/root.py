@@ -273,9 +273,8 @@ password_field = Entry(
 password_field.place(x=x_margin, y=y_password_field)
 
 
-button_delete_password = Button(master=frame_password_add, text="Delete")
-
-button_delete_password.config(command=delete_password)
+button_delete_password = Button(
+        master=frame_password_add, text="Delete", command=delete_password)
 
 button_delete_password.place(x=x_button_delete_password, y=y_password_field, width=width_button, height=height_button)
 
