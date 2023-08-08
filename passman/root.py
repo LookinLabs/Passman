@@ -124,6 +124,8 @@ def get_password(*args):
 
     password_value.set(saved_passwords[password_value_index])
 
+    button_update_password.config(state="normal")
+
 
 def show_and_hide_password():
 
@@ -287,7 +289,7 @@ button_show_password.place(
 
 
 button_update_password = Button(
-        frame_password_add, text="Edit", command=update_password)
+        frame_password_add, text="Edit", state="disabled", command=update_password)
 
 button_update_password.place(
         x=x_button_update_password, y=y_button_show_password, width=width_button, height=height_button)
