@@ -182,6 +182,20 @@ def delete_password(*args):
 
         saved_passwords.pop(password_value_index)
 
+        old_file_lines = []
+
+        with open("passman.txt", "r") as file:
+
+            old_file_lines = file.readlines()
+
+        with open("passman.txt", "w") as file:
+
+            for index, line in enumerate(old_file_lines):
+
+                if index != password_value_index:
+
+                    file.write(line)
+
         window_delete_password.destroy()
 
         password_value.set("")
