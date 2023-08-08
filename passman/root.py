@@ -251,9 +251,25 @@ password_list.configure(bg="gray96", selectbackground="gray")
 
 password_list.configure(activestyle="none", height=4)
 
-for password_name in saved_passwords_names:
+with open("passman.txt") as data:
 
-    password_list.insert(END, password_name)
+    row = data.readline()
+
+    while row != "":
+
+        password_parts = row.split(":")
+
+        name = password_parts[0]
+
+        value = password_parts[1]
+
+        password_list.insert(END, name)
+
+        saved_passwords_names.append(name)
+
+        saved_passwords.append(value)
+
+        row = data.readline()
 
 password_list.bind("<<ListboxSelect>>", get_password)
 
