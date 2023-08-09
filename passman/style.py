@@ -46,11 +46,33 @@ y_window_password_delete = 200
 
 width_label_password_delete = 370
 
+y_new_password_name = y_margin + 20
+
+y_label_new_password = (y_new_password_name) * 2
+
+y_new_password_field = y_label_new_password + 20
+
+y_button_save_new_password = y_new_password_field + 25
+
+x_button_cancel_new_password = x_margin + 55
+
+x_button_show_new_password = x_margin + width_password_field * 9
+
 x_window_message = 320
 
 y_window_message = 200
 
 width_label_message = 300
+
+height_label_message = 40
+
+x_label_message = x_window_message / 2 - width_label_message / 2
+
+y_label_message = 10
+
+x_button_message = x_window_message / 2 - width_button / 2
+
+y_button_message = 100
 
 x_button_close = x / 2 - 200
 

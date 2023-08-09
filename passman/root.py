@@ -52,16 +52,14 @@ def add_password():
         message_label = Label(
             master=window_message, text="Password successfully added!", relief=GROOVE)
 
-        message_label.place(x=x_window_message / 2 - width_label_message / 2, y=10, width=width_label_message, height=40)
+        message_label.place(x=x_label_message, y=y_label_message, width=width_label_message, height=height_label_message)
 
 
         message_button = Button(master=window_message, text="Ok")
 
         message_button.config(command=window_message.destroy)
 
-        message_button_width = 70
-
-        message_button.place(x=x_window_message / 2 - message_button_width / 2, y=100, width=message_button_width, height=45)
+        message_button.place(x=x_button_message, y=y_button_message, width=width_button, height=height_button)
 
 
         window_message.mainloop()
@@ -85,9 +83,9 @@ def add_password():
     new_password_name_label.place(x=x_margin, y=y_margin)
 
 
-    new_password_name = Entry(master=window_new_password, width=20)
+    new_password_name = Entry(master=window_new_password, width=width_password_field)
 
-    new_password_name.place(x=x_margin, y=y_margin + 20)
+    new_password_name.place(x=x_margin, y=y_new_password_name)
 
 
     new_password_field_label = Label(
@@ -95,32 +93,34 @@ def add_password():
 
     new_password_field_label.configure(font=("Times New Roman", 12))
 
-    new_password_field_label.place(x=x_margin, y=50)
+    new_password_field_label.place(x=x_margin, y=y_label_new_password)
 
 
-    new_password_field = Entry(master=window_new_password, width=20, show="*")
+    new_password_field = Entry(master=window_new_password, width=width_password_field, show="*")
 
-    new_password_field.place(x=x_margin, y=70)
+    new_password_field.place(x=x_margin, y=y_new_password_field)
 
 
     button_save_new_password = Button(master=window_new_password, text="Save")
 
     button_save_new_password.config(command=save_new_password)
 
-    button_save_new_password.place(x=x_margin, y=95, width=50, height=25)
+    button_save_new_password.place(
+        x=x_margin, y=y_button_save_new_password, width=width_button, height=height_button)
 
 
     button_cancel_new_password = Button(
         master=window_new_password, text="Cancel", command=window_new_password.destroy)
 
-    button_cancel_new_password.place(x=60, y=95, width=50, height=25)
+    button_cancel_new_password.place(
+        x=x_button_cancel_new_password, y=y_button_save_new_password, width=width_button, height=height_button)
 
 
     button_show_new_password = Button(
         window_new_password, text="Show", command=show_and_hide_new_password)
 
     button_show_new_password.place(
-        x=x_window_password_new / 3 * 2, y=70, width=50, height=25)
+        x=x_button_show_new_password, y=y_new_password_field, width=width_button, height=height_button)
 
 
 def get_password(*args):
