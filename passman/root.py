@@ -165,6 +165,25 @@ def update_password():
 
         saved_passwords[current_password_index] = updated_password_value
 
+        with open('passman.txt', 'r', encoding='utf-8') as file:
+            
+            data = file.readlines()
+                
+        with open('passman.txt', 'w', encoding='utf-8') as file:
+
+            for index, line in enumerate(data):
+
+                if index == current_password_index:
+
+                    entity_name = line.split(":")[0]
+
+                    file.write(f"{entity_name}:{updated_password_value}\n")
+
+                    continue
+
+                file.write(line)
+
+
         password_field.config(state="disabled")
 
         button_delete_password.config(state="normal")
