@@ -58,6 +58,10 @@ x_button_cancel_new_password = x_margin + 55
 
 x_button_show_new_password = x_margin + width_password_field * 9
 
+y_new_password_description_label = y_button_save_new_password + 25
+
+y_new_password_description = y_new_password_description_label + 20
+
 x_window_message = 320
 
 y_window_message = 200

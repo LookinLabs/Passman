@@ -101,6 +101,19 @@ def add_password():
     new_password_field.place(x=x_margin, y=y_new_password_field)
 
 
+    new_password_description_label = Label(
+      master=window_new_password, text="Description:")
+
+    new_password_description_label.configure(font=("Times New Roman", 12))
+
+    new_password_description_label.place(x=x_margin, y=y_new_password_description_label)
+
+
+    new_password_description = Text(master=window_new_password, width=width_password_field, height=3)
+
+    new_password_description.place(x=x_margin, y=y_new_password_description)
+
+
     button_save_new_password = Button(master=window_new_password, text="Save")
 
     button_save_new_password.config(command=save_new_password)
