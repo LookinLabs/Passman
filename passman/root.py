@@ -163,25 +163,21 @@ def update_password():
 
     else:
 
+        password_name_value = password_list.get(password_list.curselection())
+
+        password_value_index = saved_passwords_names.index(password_name_value)
+
         updated_password_value = password_field.get()
 
-        saved_passwords[current_password_index] = updated_password_value
+        new_password_full_string = f"{updated_password_value}\n"
 
-        with open('passman.txt', 'r', encoding='utf-8') as file:
-            
-            data = file.readlines()
+        saved_passwords[password_value_index] = new_password_full_string
                 
         with open('passman.txt', 'w', encoding='utf-8') as file:
 
-            for index, line in enumerate(data):
+            for index in range(len(saved_passwords)):
 
-                if index == current_password_index:
-
-                    entity_name = line.split(":")[0]
-
-                    file.write(f"{entity_name}:{updated_password_value}\n")
-
-                    continue
+                line = f"{saved_passwords_names[index]}:{saved_passwords[index]}"
 
                 file.write(line)
 
