@@ -131,7 +131,9 @@ def get_password(*args):
 
     password_value_index = saved_passwords_names.index(password_name_value)
 
-    password_value.set(saved_passwords[password_value_index])
+    password_string_value = saved_passwords[password_value_index].rstrip("\n")
+
+    password_value.set(password_string_value)
 
     button_update_password.config(state="normal")
 
