@@ -6,103 +6,208 @@ saved_passwords_names = []
 saved_passwords = []
 
 
-class Main():
+class WindowGenerator:
 
-    window = Tk()
-
-    def __init__(self):
+    def __init__(self, title, x, y, resizable_x, resizable_y):
 
         self.window = Tk()
 
-        self.window.title("Pass keeper")
+        self.window.title(title)
         
         self.window.geometry(f"{x}x{y}")
 
-        self.window.resizable(False, False)
+        self.window.resizable(resizable_x, resizable_y)
 
 
-        self.window.frame_password_list = Frame(master=self.window, bd=frame_border, relief=GROOVE)
+class FrameGenerator:
 
-        self.window.frame_password_list.place(
-            x=x_margin, y=y_margin, width=width_frame_password_list, height=height_frame)
+    def __init__(self, master, bd, x, y, width, height):
+
+        self.frame = Frame(master=master, bd=bd, relief=GROOVE)
+
+        self.frame.place(
+            x=x, y=y, width=width, height=height)
         
 
-        self.window.frame_password_add = Frame(master=self.window, bd=frame_border, relief=GROOVE)
+class ListBoxGenerator:
 
-        self.window.frame_password_add.place(
-            x=x_frame_password_add, y=y_margin, width=width_frame_password_add, height=height_frame)
+    def __init__(self, master, listvariable, bg, selectbackground, activestyle, height_list, x, y, width, height):
+
+        self.listbox = Listbox(master=master, listvariable=listvariable, selectmode=SINGLE)
+
+        self.listbox.configure(bg=bg, selectbackground=selectbackground)
+
+        self.listbox.configure(activestyle=activestyle, height=height_list)
+
+        self.listbox.place(
+            x=x, y=y, width=width, height=height)
+
+
+class ButtonGenerator:
+
+    def __init__(self, master, text, command, x, y, width, height, state="normal", font=("Lora", 13)):
+
+        self.button = Button(
+            master=master, text=text, state=state, font=font)
+        
+        self.button.config(command=command) #WindowNewPassword
+
+        self.button.place(x=x, y=y, width=width, height=height)
+
+
+class LabelGenerator:
+
+    def __init__(self, master, text, font, x, y):
+
+        self.label = Label(master=master, text=text)
+        
+        self.label.configure(font=font)
+
+        self.label.place(x=x, y=y)
+
+
+class EntryGenerator:
+
+        def __init__(self, master, width, show, textvariable, x, y):
+
+            self.entry = Entry(
+                master=master,
+                width=width,
+                show=show,
+                textvariable=textvariable,
+                state=DISABLED,
+            )
+
+            self.entry.place(x=x, y=y)
+
+        
+class Main():
+
+    def __init__(self):
+
+        self.main_window = WindowGenerator("Pass keeper", x, y, False, False)
+
+
+        self.frame_password_list = FrameGenerator(
+            master=self.main_window.window, 
+            bd=frame_border, 
+            x=x_margin, 
+            y=y_margin, 
+            width=width_frame_password_list, 
+            height=height_frame
+        )
+
+
+        self.frame_password_add = FrameGenerator(
+            master=self.main_window.window, 
+            bd=frame_border, 
+            x=x_frame_password_add, 
+            y=y_margin, 
+            width=width_frame_password_add, 
+            height=height_frame
+        )
         
 
-        self.window.password_list = Listbox(master=self.window.frame_password_list, listvariable=saved_passwords_names, selectmode=SINGLE)
-
-        self.window.password_list.configure(bg="gray96", selectbackground="gray")
-
-        self.window.password_list.configure(activestyle="none", height=4)
-
-        self.window.password_list.place(
-            x=x_margin, y=y_margin, width=width_password_list, height=height_password_list)
+        self.password_list = ListBoxGenerator(
+            master=self.frame_password_list.frame,
+            listvariable=saved_passwords_names,
+            bg="gray96",
+            selectbackground="gray",
+            activestyle="none",
+            height_list=4,
+            x=x_margin,
+            y=y_margin,
+            width=width_password_list,
+            height=height_password_list
+        )
         
-        self.window.password_list.bind("<<ListboxSelect>>", self.get_password)
+        self.password_list.listbox.bind("<<ListboxSelect>>", self.get_password)
 
         
         self.fill_data()
 
 
-        self.window.button_add_new_password = Button(
-            master=self.window.frame_password_add, text="Add new password")
-        
-        self.window.button_add_new_password.config(command=self.window.destroy) #WindowNewPassword
+        self.button_add_new_password = ButtonGenerator(
+            master=self.frame_password_add.frame,
+            text="Add new password",
+            command=self.main_window.window.destroy, #WindowNewPassword
+            x=x_margin,
+            y=y_margin,
+            width=200,
+            height=height_button
+        )
 
-        self.window.button_add_new_password.place(x=x_margin, y=y_margin, width=200, height=height_button)
-
         
-        self.window.password_field_label = Label(master=self.window.frame_password_add, text="Edit password:")
-        
-        self.window.password_field_label.configure(font=("Times New Roman", 12))
-
-        self.window.password_field_label.place(x=x_margin, y=y_label_password_field)
+        self.password_field_label = LabelGenerator(
+            master=self.frame_password_add.frame,
+            text="Edit password:",
+            font=("Times New Roman", 12),
+            x=x_margin, y=y_label_password_field
+        )
 
 
         self.password_value = StringVar()
 
 
-        self.window.password_field = Entry(
-            master=self.window.frame_password_add, width=width_password_field, show="*", textvariable=self.password_value, state=DISABLED)
-        
-        self.window.password_field.place(x=x_margin, y=y_password_field)
+        self.password_field = EntryGenerator(
+            master=self.frame_password_add.frame, 
+            width=width_password_field, 
+            show="*", 
+            textvariable=self.password_value,
+            x=x_margin,
+            y=y_password_field
+        )
 
         
-        self.window.button_delete_password = Button(
-        master=self.window.frame_password_add, text="Delete", command=self.delete_password)
-
-        self.window.button_delete_password.place(x=x_button_delete_password, y=y_password_field, width=width_button, height=height_button)
-
-
-        self.window.button_show_password = Button(
-        self.window.frame_password_add, text="Show", command=self.window.destroy) #self.show_and_hide_password
-
-        self.window.button_show_password.place(
-        x=x_margin, y=y_button_show_password, width=width_button, height=height_button)
+        self.button_delete_password = ButtonGenerator(
+            master=self.frame_password_add.frame,
+            text="Delete",
+            command=self.delete_password,
+            x=x_button_delete_password,
+            y=y_password_field,
+            width=width_button,
+            height=height_button
+        )
 
 
-        self.window.button_update_password = Button(
-        self.window.frame_password_add, text="Edit", state="disabled", command=self.update_password)
+        self.button_show_password = ButtonGenerator(
+            master=self.frame_password_add.frame,
+            text="Show",
+            command=self.main_window.window.destroy, #self.show_and_hide_password
+            x=x_margin,
+            y=y_button_show_password,
+            width=width_button,
+            height=height_button
+        )
 
-        self.window.button_update_password.place(
-        x=x_button_update_password, y=y_button_show_password, width=width_button, height=height_button)
+
+        self.button_update_password = ButtonGenerator(
+            master=self.frame_password_add.frame,
+            text="Edit",
+            state="disabled", 
+            command=self.update_password,
+            x=x_button_update_password,
+            y=y_button_show_password,
+            width=width_button,
+            height=height_button
+        )
 
 
-        self.window.close_self_button = Button(
-            self.window.frame_password_add, text="Close", font=("Lora", 13), command=self.window.destroy)
+        self.button_close_window = ButtonGenerator(
+            master=self.frame_password_add.frame,
+            text="Close",
+            command=self.main_window.window.destroy,
+            x=x_button_close, 
+            y=y_button_close, 
+            width=width_window_button_close,
+            height=height_window_button_close
+        )
         
-        self.window.close_self_button.place(
-            x=x_button_close, y=y_button_close, width=width_window_button_close, height=height_window_button_close)
         
-        
-        self.window.current_password_index = 0
+        self.current_password_index = 0
 
         
-        self.window.mainloop()
+        self.main_window.window.mainloop()
 
 
     def fill_data(self):
@@ -119,7 +224,7 @@ class Main():
 
                 value = password_parts[1]
 
-                self.window.password_list.insert(END, name)
+                self.password_list.listbox.insert(END, name)
 
                 saved_passwords_names.append(name)
 
@@ -175,35 +280,45 @@ class Main():
         password_value_index = self.window.saved_passwords.index(password_field_value)
 
 
-        window_delete_password = Tk()
+        self.window_delete_password = WindowGenerator(
+            "password deletion",
+            x_window_password_delete,
+            y_window_password_delete,
+            False,
+            False
+        )
 
-        window_delete_password.title("Password deletion")
 
-        window_delete_password.geometry(
-            f"{x_window_password_delete}x{y_window_password_delete}")
-
-        window_delete_password.resizable(False, False)
-
-
-        label_delete_password = Label(
-            master=window_delete_password, text=f"Are you sure you want to delete password '{saved_passwords_names[password_value_index]}'?", relief=GROOVE)
-
-        label_delete_password.place(
-            x=x_window_password_delete / 2 - width_label_password_delete / 2, y=10, width=width_label_password_delete, height=40)
+        self.label_delete_password = LabelGenerator(
+            master=self.window_delete_password.window,
+            text=f"Are you sure you want to delete password '{saved_passwords_names[password_value_index]}'?",
+            x=x_window_password_delete / 2 - width_label_password_delete / 2,
+            y=10,
+            width=width_label_password_delete,
+            height=40
+        )
         
 
-        button_save_password = Button(master=window_delete_password, text="Yes!")
+        self.button_save_password = ButtonGenerator(
+            master=self.window_delete_password.window,
+            text="Yes!",
+            command=confirm_delete_password,
+            x=x_margin,
+            y=95, 
+            width=50,
+            height=25
+        )
 
-        button_save_password.config(command=confirm_delete_password)
 
-        button_save_password.place(x=x_margin, y=95, width=50, height=25)
-
-
-        button_cancel_save_password = Button(master=window_delete_password, text="Cancel")
-
-        button_cancel_save_password.config(command=window_delete_password.destroy)
-
-        button_cancel_save_password.place(x=70, y=95, width=50, height=25)
+        self.button_cancel_save_password = ButtonGenerator(
+            master=self.window_delete_password.window,
+            text="Cancel",
+            command=self.window_delete_password.window.destroy,
+            x=70,
+            y=95,
+            width=50,
+            height=25
+        )
 
 
     def update_password(self):
