@@ -1,0 +1,78 @@
+import style
+import tkinter as tk
+from tkinter import ttk
+
+
+class ButtonGenerator(tk.Button):
+
+    def __init__(self, master, text, command, x, y, width, height, state="normal", font=("Lora", 13)):
+
+        super().__init__(master)
+
+        self.configure(
+            text=text,
+            state=state,
+            font=font,
+            command=command #WindowNewPassword
+        )
+
+        self.place(x=x, y=y, width=width, height=height)
+
+
+class LabelGenerator(tk.Label):
+
+    def __init__(self, master, text, font, x, y):
+
+        super().__init__(master)
+
+        self.configure(text=text, font=font)
+
+        self.place(x=x, y=y)
+
+
+class EntryGenerator(tk.Entry):
+        
+
+    def __init__(self, master, width, show, textvariable, x, y, state="normal"):
+
+        super().__init__(master)
+
+        self.configure(
+            width=width,
+            show=show,
+            textvariable=textvariable,
+            state=state,
+        )
+
+        self.place(x=x, y=y)
+
+
+class TextGenerator(tk.Text):
+
+    def __init__(self, master, width, x, y, height=3):
+
+        super().__init__(master)
+
+        self.configure(width=width, height=height)
+
+        self.place(x=x, y=y)
+
+
+class ConfirmationGenerator(tk.Toplevel):
+
+    def __init__(self, title, x, y):
+        
+        super().__init__(title, x, y)
+
+        self.title(title)
+
+        self.minsize(x=style.x_window_message, y=style.y_window_message)
+
+
+class NotificationGenerator(tk.Toplevel):
+
+    def __init__(self, title="notification"):
+
+        super().__init__()
+
+        self.title(title)
