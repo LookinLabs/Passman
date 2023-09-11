@@ -1,6 +1,7 @@
 import tkinter as tk
 import style
 from widget_generators import *
+import helper_functions
 
 
 class WindowNewPassword(tk.Toplevel):
@@ -104,7 +105,7 @@ class WindowNewPassword(tk.Toplevel):
         self.button_show_new_password = ButtonGenerator(
             master=self,
             text="Show",
-            command=self.show_and_hide_new_password,
+            command=lambda: helper_functions.toggle_password(self.new_password_field),
             x=style.x_button_show_new_password,
             y=style.y_new_password_field,
             width=style.width_button,
