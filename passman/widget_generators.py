@@ -5,14 +5,14 @@ from tkinter import ttk
 
 class ButtonGenerator(tk.Button):
 
-    def __init__(self, master, text, command, x, y, width, height, state="normal", font=("Lora", 13)):
+    def __init__(self, master, text, command, x, y, width, height, state="normal"):
 
         super().__init__(master)
 
         self.configure(
             text=text,
             state=state,
-            font=font,
+            font=("Arial", 12),
             command=command #WindowNewPassword
         )
 
