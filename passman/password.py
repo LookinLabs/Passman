@@ -6,7 +6,7 @@ import helper_functions
 
 class WindowNewPassword(tk.Toplevel):
 
-    def __init__(self, parent, *args):
+    def __init__(self, parent):
 
         super().__init__(parent)
 
@@ -134,14 +134,16 @@ class WindowNewPassword(tk.Toplevel):
 
         self.parent.saved_passwords_names.append(password_name_value)
 
+
         self.parent.password_list.insert(tk.END, password_name_value)
 
         self.parent.saved_passwords.append(password_field_value)
+        print(self.parent.saved_passwords)
 
 
         with open("passman.txt", "at") as data:
 
-            data.write(f"{password_name_value}:{password_field_value}\n")
+            data.write(f"{password_name_value}:{password_field_value}")
 
         self.destroy()
 
@@ -158,8 +160,6 @@ class WindowNewPassword(tk.Toplevel):
             text="Password successfully added!",
             x=style.x_label_message,
             y=style.y_label_message,
-            width=style.width_label_message,
-            height=style.height_label_message
         )
 
 
@@ -189,8 +189,6 @@ class WindowDeletePassword:
 
         self.window_delete_password = ConfirmationGenerator(
             "password deletion",
-            style.x_window_password_delete,
-            style.y_window_password_delete,
         )
 
 

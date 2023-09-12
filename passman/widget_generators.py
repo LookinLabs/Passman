@@ -60,13 +60,13 @@ class TextGenerator(tk.Text):
 
 class ConfirmationGenerator(tk.Toplevel):
 
-    def __init__(self, title, x, y):
+    def __init__(self, title):
         
-        super().__init__(title, x, y)
+        super().__init__()
 
         self.title(title)
 
-        self.minsize(x=style.x_window_message, y=style.y_window_message)
+        self.minsize(x=style.x_window_password_delete, y=style.y_window_password_delete)
 
 
 class NotificationGenerator(tk.Toplevel):

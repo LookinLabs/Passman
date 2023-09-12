@@ -150,7 +150,7 @@ class App(tk.Tk):
         self.button_delete_password = ButtonGenerator(
             master=self.frame_password_handling,
             text="Delete",
-            command=lambda: self.create_delete_password_window(self.password_value),
+            command=self.create_delete_password_window,
             x=style.x_button_delete_password,
             y=style.y_password_field,
             width=style.width_button,
@@ -192,9 +192,9 @@ class App(tk.Tk):
         )
 
 
-    def create_delete_password_window(self, *args):
+    def create_delete_password_window(self):
 
-        return WindowDeletePassword(self, *args)
+        return WindowDeletePassword(self)
 
     
     def create_new_password_window(self):
