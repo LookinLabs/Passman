@@ -7,16 +7,12 @@ from helper_functions import toggle_password
 
 class App(tk.Tk):
 
-    def __init__(self, title, x, y):
+    def __init__(self):
 
         #running the app
         super().__init__()
 
-        self.title(title)
-
-        self.geometry(f"{x}x{y}")
-
-        self.minsize(x, y)
+        self.initialize_main_window()
 
         self.saved_passwords_names = []
 
@@ -154,6 +150,15 @@ class App(tk.Tk):
         self.mainloop()
 
 
+    def initialize_main_window(self):
+
+        self.title("Passman")
+
+        self.geometry(f"{style.x}x{style.y}")
+
+        self.minsize(style.x, style.y)
+
+
     def fill_data(self):
     
         with open("passman.txt") as data:
@@ -238,4 +243,4 @@ class App(tk.Tk):
             self.button_update_password.config(text="Edit")
 
 
-App("Pass keeper", style.x, style.y)
+App()
