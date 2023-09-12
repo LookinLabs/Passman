@@ -12,13 +12,41 @@ class App(tk.Tk):
         #running the app
         super().__init__()
 
-        self.initialize_main_window()
-
+        #switch it to connection with database
         self.saved_passwords_names = []
 
         self.saved_passwords = []
 
-        #widgets
+
+        self.initialize_main_window()
+
+
+        self.initialize_password_list_frame()
+
+
+        self.fill_data()
+
+
+        self.initialize_password_handling_frame()
+
+
+        self.password_value_index = 0        
+
+
+        self.mainloop()
+
+
+    def initialize_main_window(self):
+
+        self.title("Passman")
+
+        self.geometry(f"{style.x}x{style.y}")
+
+        self.minsize(style.x, style.y)
+
+
+    def initialize_password_list_frame(self):
+
         self.frame_password_list = tk.Frame(
             master=self,
             bd=3,
@@ -51,114 +79,6 @@ class App(tk.Tk):
         self.password_list.bind("<<ListboxSelect>>", self.get_password)
 
 
-        self.fill_data()
-
-
-        self.frame_password_add = ttk.Frame(
-            master=self,
-            relief=tk.GROOVE
-        )
-
-        self.frame_password_add.place(
-            x=style.x_frame_password_add,
-            y=style.y_margin,
-            width=style.width_frame_password_add,
-            height=style.height_frame
-        )
-
-
-        self.button_add_new_password = ButtonGenerator(
-            master=self.frame_password_add,
-            text="Add new password",
-            command=self.create_new_password_window,
-            x=style.x_margin,
-            y=style.y_margin,
-            width=200,
-            height=style.height_button
-        )
-
-
-        self.password_field_label = LabelGenerator(
-            master=self.frame_password_add,
-            text="Edit password:",
-            font=("Times New Roman", 12),
-            x=style.x_margin, 
-            y=style.y_label_password_field,
-        )
-
-
-        self.password_value = tk.StringVar()
-
-        self.password_field = EntryGenerator(
-            master=self.frame_password_add, 
-            width=style.width_password_field, 
-            show="*", 
-            textvariable=self.password_value,
-            x=style.x_margin,
-            y=style.y_password_field
-        )
-
-        
-        self.button_delete_password = ButtonGenerator(
-            master=self.frame_password_add,
-            text="Delete",
-            command=self.create_delete_password_window,
-            x=style.x_button_delete_password,
-            y=style.y_password_field,
-            width=style.width_button,
-            height=style.height_button
-        )
-
-
-        self.button_show_password = ButtonGenerator(
-            master=self.frame_password_add,
-            text="Show",
-            command=lambda: toggle_password(self.password_field),
-            x=style.x_margin,
-            y=style.y_button_show_password,
-            width=style.width_button,
-            height=style.height_button
-        )
-
-
-        self.button_update_password = ButtonGenerator(
-            master=self.frame_password_add,
-            text="Edit",
-            state="disabled", 
-            command=self.update_password,
-            x=style.x_button_update_password,
-            y=style.y_button_show_password,
-            width=style.width_button,
-            height=style.height_button
-        )
-
-
-        self.button_close_window = ButtonGenerator(
-            master=self.frame_password_add,
-            text="Close",
-            command=self.destroy,
-            x=style.x_button_close, 
-            y=style.y_button_close, 
-            width=style.width_window_button_close,
-            height=style.height_window_button_close
-        )
-
-
-        self.password_value_index = 0        
-
-
-        self.mainloop()
-
-
-    def initialize_main_window(self):
-
-        self.title("Passman")
-
-        self.geometry(f"{style.x}x{style.y}")
-
-        self.minsize(style.x, style.y)
-
-
     def fill_data(self):
     
         with open("passman.txt") as data:
@@ -180,6 +100,98 @@ class App(tk.Tk):
                 self.saved_passwords.append(value)
 
                 row = data.readline()
+
+
+    def initialize_password_handling_frame(self):
+
+        self.frame_password_handling = ttk.Frame(
+            master=self,
+            relief=tk.GROOVE
+        )
+
+        self.frame_password_handling.place(
+            x=style.x_frame_password_add,
+            y=style.y_margin,
+            width=style.width_frame_password_add,
+            height=style.height_frame
+        )
+
+
+        self.button_add_new_password = ButtonGenerator(
+            master=self.frame_password_handling,
+            text="Add new password",
+            command=self.create_new_password_window,
+            x=style.x_margin,
+            y=style.y_margin,
+            width=200,
+            height=style.height_button
+        )
+
+
+        self.password_field_label = LabelGenerator(
+            master=self.frame_password_handling,
+            text="Edit password:",
+            font=("Times New Roman", 12),
+            x=style.x_margin, 
+            y=style.y_label_password_field,
+        )
+
+
+        self.password_value = tk.StringVar()
+
+        self.password_field = EntryGenerator(
+            master=self.frame_password_handling, 
+            width=style.width_password_field, 
+            show="*", 
+            textvariable=self.password_value,
+            x=style.x_margin,
+            y=style.y_password_field
+        )
+
+        
+        self.button_delete_password = ButtonGenerator(
+            master=self.frame_password_handling,
+            text="Delete",
+            command=self.create_delete_password_window,
+            x=style.x_button_delete_password,
+            y=style.y_password_field,
+            width=style.width_button,
+            height=style.height_button
+        )
+
+
+        self.button_show_password = ButtonGenerator(
+            master=self.frame_password_handling,
+            text="Show",
+            command=lambda: toggle_password(self.password_field),
+            x=style.x_margin,
+            y=style.y_button_show_password,
+            width=style.width_button,
+            height=style.height_button
+        )
+
+
+        self.button_update_password = ButtonGenerator(
+            master=self.frame_password_handling,
+            text="Edit",
+            state="disabled", 
+            command=self.update_password,
+            x=style.x_button_update_password,
+            y=style.y_button_show_password,
+            width=style.width_button,
+            height=style.height_button
+        )
+
+
+        self.button_close_window = ButtonGenerator(
+            master=self.frame_password_handling,
+            text="Close",
+            command=self.destroy,
+            x=style.x_button_close, 
+            y=style.y_button_close, 
+            width=style.width_window_button_close,
+            height=style.height_window_button_close
+        )
 
 
     def create_delete_password_window(self):
