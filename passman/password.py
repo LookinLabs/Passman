@@ -6,7 +6,7 @@ import helper_functions
 
 class WindowNewPassword(tk.Toplevel):
 
-    def __init__(self, parent):
+    def __init__(self, parent, *args):
 
         super().__init__(parent)
 
@@ -178,12 +178,13 @@ class WindowNewPassword(tk.Toplevel):
 
 class WindowDeletePassword:
 
-    def __init__(self):
+    def __init__(self, parent):
 
-    
-        password_field_value = self.password_value.get()
+        self.parent = parent
 
-        password_value_index = self.saved_passwords.index(password_field_value)
+        password_field_value = self.parent.password_value.get()
+
+        password_value_index = self.parent.saved_passwords.index(password_field_value)
 
 
         self.window_delete_password = ConfirmationGenerator(
@@ -195,7 +196,7 @@ class WindowDeletePassword:
 
         self.label_delete_password = LabelGenerator(
             master=self.window_delete_password,
-            text=f"Are you sure you want to delete password '{self.saved_passwords_names[password_value_index]}'?",
+            text=f"Are you sure you want to delete password '{self.parent.saved_passwords_names[password_value_index]}'?",
             x=style.x_window_password_delete / 2 - style.width_label_password_delete / 2,
             y=10,
             width=style.width_label_password_delete,

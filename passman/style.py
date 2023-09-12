@@ -14,7 +14,7 @@ frame_border = 3
 
 width_frame_password_list = x / 2 - 10
 
-width_password_list = x / 2 - 10
+width_password_list = x / 2 - 30
 
 height_password_list = y - 10
 
