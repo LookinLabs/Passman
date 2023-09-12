@@ -44,6 +44,8 @@ class App(tk.Tk):
 
         self.minsize(style.x, style.y)
 
+        self.eval("tk::PlaceWindow . center")
+
 
     def initialize_password_list_frame(self):
 
