@@ -115,16 +115,6 @@ class WindowNewPassword(tk.Toplevel):
         )
 
 
-    # def show_and_hide_new_password():
-
-    #     if new_password_field["show"] == "*":
-
-    #         new_password_field["show"] = ""
-
-    #     else:
-
-    #         new_password_field["show"] = "*"
-
         self.mainloop()
 
 
