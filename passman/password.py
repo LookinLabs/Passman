@@ -139,7 +139,8 @@ class WindowNewPassword(tk.Toplevel):
 
         self.window_message = NotificationGenerator(
             title = "Notification",
-            text="Password successfully added"
+            text="Password successfully added",
+            font=("Lora", 12)
         )
 
 
