@@ -85,7 +85,7 @@ class WindowNewPassword(tk.Toplevel):
         self.button_save_new_password = ButtonGenerator(
             master=self,
             text="Save",
-            command=self.save_new_password,
+            command=self.__save_new_password,
             x=style.x_margin,
             y=style.y_button_save_new_password,
             width=style.width_button,
@@ -118,7 +118,7 @@ class WindowNewPassword(tk.Toplevel):
         self.mainloop()
 
 
-    def save_new_password(self):
+    def __save_new_password(self):
 
         password_name_value = self.new_password_name.get()
 
@@ -130,7 +130,6 @@ class WindowNewPassword(tk.Toplevel):
         self.parent.password_list.insert(tk.END, password_name_value)
 
         self.parent.saved_passwords.append(password_field_value)
-        print(self.parent.saved_passwords)
 
 
         with open("passman.txt", "at") as data:
@@ -142,27 +141,8 @@ class WindowNewPassword(tk.Toplevel):
 
         self.window_message = NotificationGenerator(
             title = "Notification",
-            # x=style.x_window_message,
-            # y=style.y_window_message
+            text="Password successfully added"
         )
-
-
-        self.message_label = LabelGenerator(
-            master=self.window_message,
-            text="Password successfully added!",
-            x=style.x_label_message,
-            y=style.y_label_message,
-        )
-
-
-        self.message_button = ButtonGenerator(
-            master=self.window_message,
-            text="Ok",
-            command=self.destroy,
-            x=style.x_button_message,
-            y=style.y_button_message,
-            width=style.width_button, 
-            height=style.height_button)
 
 
         self.window_message.mainloop()
