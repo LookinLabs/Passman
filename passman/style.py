@@ -18,9 +18,9 @@ width_password_list = x / 2 - 30
 
 height_password_list = y - 10
 
-x_frame_password_add = x / 2 - 10
+x_frame_password_handling = x / 2 - 10
 
-width_frame_password_add = x / 2 + 10
+width_frame_password_handling = x / 2 + 10
 
 height_frame = y - y_margin * 2
 

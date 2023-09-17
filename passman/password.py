@@ -14,6 +14,8 @@ class WindowNewPassword(tk.Toplevel):
 
         self.geometry(
             f"{style.x_window_password_new}x{style.y_window_password_new}")
+        
+        self.eval("tk::PlaceWindow . center")
 
         self.resizable(False, False)
 

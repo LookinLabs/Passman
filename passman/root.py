@@ -18,16 +18,16 @@ class App(tk.Tk):
         self.saved_passwords = []
 
 
-        self.initialize_main_window()
+        self.__initialize_main_window()
 
 
-        self.initialize_password_list_frame()
+        self.__initialize_password_list_frame()
 
 
-        self.fill_data()
+        self.__fill_data()
 
 
-        self.initialize_password_handling_frame()
+        self.__initialize_password_handling_frame()
 
 
         self.password_value_index = 0        
@@ -36,7 +36,7 @@ class App(tk.Tk):
         self.mainloop()
 
 
-    def initialize_main_window(self):
+    def __initialize_main_window(self):
 
         self.title("Passman")
 
@@ -47,7 +47,7 @@ class App(tk.Tk):
         self.eval("tk::PlaceWindow . center")
 
 
-    def initialize_password_list_frame(self):
+    def __initialize_password_list_frame(self):
 
         self.frame_password_list = tk.Frame(
             master=self,
@@ -77,10 +77,10 @@ class App(tk.Tk):
         
         self.password_list.place(x=style.x_margin, y=style.y_margin, width=style.width_password_list, height=style.height_password_list)
 
-        self.password_list.bind("<<ListboxSelect>>", self.get_password)
+        self.password_list.bind("<<ListboxSelect>>", self.__get_password)
 
 
-    def fill_data(self):
+    def __fill_data(self):
     
         with open("passman.txt") as data:
 
@@ -103,16 +103,16 @@ class App(tk.Tk):
                 row = data.readline()
 
 
-    def initialize_password_handling_frame(self):
+    def __initialize_password_handling_frame(self):
 
         self.frame_password_handling = ttk.Frame(
             master=self,
         )
 
         self.frame_password_handling.place(
-            x=style.x_frame_password_add,
+            x=style.x_frame_password_handling,
             y=style.y_margin,
-            width=style.width_frame_password_add,
+            width=style.width_frame_password_handling,
             height=style.height_frame
         )
 
@@ -120,7 +120,7 @@ class App(tk.Tk):
         self.button_add_new_password = ButtonGenerator(
             master=self.frame_password_handling,
             text="Add new password",
-            command=self.create_new_password_window,
+            command=self.__create_new_password_window,
             x=style.x_margin,
             y=style.y_margin,
             width=200,
@@ -199,12 +199,12 @@ class App(tk.Tk):
         return WindowDeletePassword(self)
 
     
-    def create_new_password_window(self):
+    def __create_new_password_window(self):
 
         return WindowNewPassword(self)
 
 
-    def get_password(self, *args):
+    def __get_password(self, *args):
 
         password_name_value = self.password_list.get(self.password_list.curselection())
 
