@@ -131,7 +131,6 @@ class App(tk.Tk):
         self.password_field_label = LabelGenerator(
             master=self.frame_password_handling,
             text="Edit password:",
-            font=("Times New Roman", 12),
             x=style.x_margin, 
             y=style.y_label_password_field,
         )

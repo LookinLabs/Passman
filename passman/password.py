@@ -140,7 +140,6 @@ class WindowNewPassword(tk.Toplevel):
         self.window_message = NotificationGenerator(
             title = "Notification",
             text="Password successfully added",
-            font=("Lora", 12)
         )
 
 
@@ -195,5 +194,7 @@ class WindowDeletePassword:
 
     def confirm_password_deletion(self):
 
-        return NotificationGenerator(text="Password successfully deleted!")
+        self.notification_window = NotificationGenerator(text="Password successfully deleted!")
+
+        self.window_delete_password.destroy()
     
