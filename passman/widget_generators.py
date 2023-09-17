@@ -91,4 +91,4 @@ class ConfirmationGenerator(tk.Toplevel):
 
         self.title(title)
 
-        self.minsize(x=style.x_window_password_delete, y=style.y_window_password_delete)
+        self.minsize(width=style.x_window_password_delete, height=style.y_window_password_delete)

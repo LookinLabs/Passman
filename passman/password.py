@@ -165,18 +165,17 @@ class WindowDeletePassword:
 
         self.label_delete_password = LabelGenerator(
             master=self.window_delete_password,
+            font=("Times New Roman", 12),
             text=f"Are you sure you want to delete password '{self.parent.saved_passwords_names[password_value_index]}'?",
             x=style.x_window_password_delete / 2 - style.width_label_password_delete / 2,
             y=10,
-            width=style.width_label_password_delete,
-            height=40
         )
         
 
         self.button_save_password = ButtonGenerator(
             master=self.window_delete_password,
             text="Yes!",
-            command=confirm_delete_password,
+            command=self.confirm_password_deletion,
             x=style.x_margin,
             y=95, 
             width=50,
@@ -193,3 +192,8 @@ class WindowDeletePassword:
             width=50,
             height=25
         )
+
+    def confirm_password_deletion(self):
+
+        return NotificationGenerator(text="Password successfully deleted!")
+    
