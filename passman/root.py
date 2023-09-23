@@ -1,4 +1,5 @@
 import tkinter as tk
+import sqlite3
 import style
 from widget_generators import *
 from tkinter import ttk
@@ -24,7 +25,7 @@ class App(tk.Tk):
         self.__initialize_password_list_frame()
 
 
-        self.__fill_data()
+        self.__fetch()
 
 
         self.__initialize_password_handling_frame()
@@ -80,27 +81,32 @@ class App(tk.Tk):
         self.password_list.bind("<<ListboxSelect>>", self.__get_password)
 
 
-    def __fill_data(self):
-    
-        with open("passman.txt") as data:
+    def __fetch(self):
 
-            row = data.readline()
+        connection = sqlite3.connect("passman.db")
 
-            while row != "":
+        cursor = connection.cursor()
 
-                password_parts = row.split(":")
+        # cursor.execute("CREATE TABLE passman (id INTEGER PRIMARY KEY AUTOINCREMENT, password_address TEXT, password_name TEXT, password TEXT, password_description TEXT DEFAULT NULL, password_update DATETIME DEFAULT CURRENT_TIMESTAMP)") # How to add timestamp?
 
-                name = password_parts[0]
+        # passwords = [
+        #     ("hh.ee", "haha", "12345678"),
+        #     ("asdfg.com", "asdfg", "123412")
+        # ]
 
-                value = password_parts[1]
+        # cursor.executemany("INSERT INTO passman (password_address, password_name, password) VALUES (?,?,?)", passwords)
 
-                self.saved_passwords_names.append(name)
+        # connection.commit()
 
-                self.password_list.insert(tk.END, name)
+        # for row in cursor.execute("SELECT * FROM passman"):
 
-                self.saved_passwords.append(value)
+        #     print(row)
+        for row in cursor.execute("SELECT password_name, password_address FROM passman"):
 
-                row = data.readline()
+            self.password_list.insert(tk.END, f"{row[0]} {row[1]}")
+
+
+        connection.close()
 
 
     def __initialize_password_handling_frame(self):
