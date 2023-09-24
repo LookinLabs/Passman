@@ -170,16 +170,16 @@ class App(tk.Tk):
         )
 
 
-        # self.button_update_password = ButtonGenerator(
-        #     master=self.frame_password_handling,
-        #     text="Edit",
-        #     state="disabled", 
-        #     command=self.update_password,
-        #     x=style.x_button_update_password,
-        #     y=style.y_button_show_password,
-        #     width=style.width_button,
-        #     height=style.height_button
-        # )
+        self.button_update_password = ButtonGenerator(
+            master=self.frame_password_handling,
+            text="Edit",
+            state="disabled", 
+            command=self.update_password,
+            x=style.x_button_update_password,
+            y=style.y_button_show_password,
+            width=style.width_button,
+            height=style.height_button
+        )
 
 
         self.button_close_window = ButtonGenerator(
@@ -230,24 +230,13 @@ class App(tk.Tk):
 
         else:
 
-            password_name_value = self.password_list.get(self.password_list.curselection())
+            password_list_value = self.password_list.get(self.password_list.curselection()).split(" ")
 
-            password_value_index = self.saved_passwords_names.index(password_name_value)
-
-            updated_password_value = self.password_field.get()
-
-            new_password_full_string = f"{updated_password_value}\n"
-
-            self.saved_passwords[password_value_index] = new_password_full_string
-                    
-            with open('passman.txt', 'w', encoding='utf-8') as file:
-
-                for index in range(len(self.saved_passwords)):
-
-                    line = f"{self.saved_passwords_names[index]}:{self.saved_passwords[index]}"
-
-                    file.write(line)
-
+            db_connection = sqlite3.connect("passman.db")
+            
+            cursor = db_connection.cursor()
+            
+            cursor.execute(f"UPDATE passman SET password = '{self.password_value.get()}' WHERE password_name = '{password_list_value[0]}' AND password_address = '{password_list_value[1]}';")
 
             self.password_field.config(state="disabled")
 
