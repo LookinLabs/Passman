@@ -238,6 +238,10 @@ class App(tk.Tk):
             
             cursor.execute(f"UPDATE passman SET password = '{self.password_value.get()}' WHERE password_name = '{password_list_value[0]}' AND password_address = '{password_list_value[1]}';")
 
+            db_connection.commit()
+
+            db_connection.close()
+
             self.password_field.config(state="disabled")
 
             self.button_delete_password.config(state="normal")
