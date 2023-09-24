@@ -195,7 +195,11 @@ class App(tk.Tk):
 
     def create_delete_password_window(self):
 
-        return WindowDeletePassword(self)
+        print(self.password_list.curselection())
+
+        password_index = self.password_list.curselection()[0] + 1
+
+        WindowDeletePassword(password_index)
 
     
     def __create_new_password_window(self):

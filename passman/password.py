@@ -179,14 +179,9 @@ class WindowNewPassword(tk.Toplevel):
 
 class WindowDeletePassword:
 
-    def __init__(self, parent):
+    def __init__(self, index):
 
-        self.parent = parent
-
-        password_field_value = self.parent.password_value.get()
-
-        password_value_index = self.parent.saved_passwords.index(password_field_value)
-
+        self.index = index
 
         self.window_delete_password = ConfirmationGenerator(
             "password deletion",
@@ -196,7 +191,7 @@ class WindowDeletePassword:
         self.label_delete_password = LabelGenerator(
             master=self.window_delete_password,
             font=("Times New Roman", 12),
-            text=f"Are you sure you want to delete password '{self.parent.saved_passwords_names[password_value_index]}'?",
+            text=f"Are you sure you want to delete password '{self.index}'?",
             x=style.x_window_password_delete / 2 - style.width_label_password_delete / 2,
             y=10,
         )
@@ -225,6 +220,16 @@ class WindowDeletePassword:
 
     def confirm_password_deletion(self):
 
+        connection = sqlite3.connect("passman.db")
+
+        cursor = connection.cursor()
+        
+        cursor.execute(f"DELETE FROM passman WHERE id = '{self.index}';")
+
+        connection.commit()
+
+        connection.close()
+        
         self.notification_window = NotificationGenerator(text="Password successfully deleted!")
 
         self.window_delete_password.destroy()
