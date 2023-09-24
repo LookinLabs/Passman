@@ -20,18 +20,39 @@ class WindowNewPassword(tk.Toplevel):
 
 
         self.parent = parent
+
+        self.new_password_address = tk.StringVar()
         
         self.new_password_name = tk.StringVar()
 
         self.new_password_field = tk.StringVar()
 
 
-        self.new_password_name_label = LabelGenerator(
+        self.new_password_address_label = LabelGenerator(
             master=self,
-            text="Enter your password's name(usually it's a domain address):",
+            text="Enter your password's address:",
             font=("Times New Roman", 12),
             x=style.x_margin,
             y=style.y_margin
+        )
+
+
+        self.new_password_address = EntryGenerator(
+            master=self,
+            show="",
+            textvariable=self.new_password_address,
+            width=style.width_password_field,
+            x=style.x_margin,
+            y=style.y_new_password_address
+        )
+
+
+        self.new_password_name_label = LabelGenerator(
+            master=self,
+            text="Enter your password's name:",
+            font=("Times New Roman", 12),
+            x=style.x_margin,
+            y=style.y_label_new_password_name
         )
 
 

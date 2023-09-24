@@ -28,9 +28,13 @@ y_label_password_field = height_button + 20
 
 y_password_field = y_label_password_field + 20
 
+y_label_password_address = height_button + 20
+
+y_password_name = y_label_password_address + 20
+
 width_password_field = 24
 
-y_button_show_password = y_password_field + 40
+y_button_show_password = y_password_name + 40
 
 x_button_update_password = x_margin + width_button + 20
 
@@ -38,7 +42,7 @@ x_button_delete_password = width_password_field + 200
 
 x_window_password_new = 320
 
-y_window_password_new = 200
+y_window_password_new = 400
 
 x_window_password_delete = 380
 
@@ -46,9 +50,13 @@ y_window_password_delete = 200
 
 width_label_password_delete = 370
 
-y_new_password_name = y_margin + 20
+y_new_password_address = y_margin + 20
 
-y_label_new_password = (y_new_password_name) * 2
+y_label_new_password_name = y_new_password_address * 2
+
+y_new_password_name = y_label_new_password_name + 20
+
+y_label_new_password = y_new_password_name * 2
 
 y_new_password_field = y_label_new_password + 20
 
@@ -85,4 +93,3 @@ y_button_close = y - 50
 width_window_button_close = 150
 
 height_window_button_close = 30
-
