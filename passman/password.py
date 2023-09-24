@@ -1,4 +1,5 @@
 import tkinter as tk
+import sqlite3
 import style
 from widget_generators import *
 import helper_functions
@@ -118,16 +119,25 @@ class WindowNewPassword(tk.Toplevel):
 
     def __save_new_password(self):
 
+        password_address_value = self.new_password_address.get()
+
         password_name_value = self.new_password_name.get()
 
         password_field_value = self.new_password_field.get()
 
-        self.parent.saved_passwords_names.append(password_name_value)
+        new_password_data = (password_address_value, password_name_value, password_field_value)
 
+        connection = sqlite3.connect("passman.db")
+
+        cursor = connection.cursor()
+
+        cursor.executemany("INSERT INTO passman (password_address, password_name, password) VALUES (?,?,?)", new_password_data)
+
+        connection.commit()
+
+        connection.close()
 
         self.parent.password_list.insert(tk.END, password_name_value)
-
-        self.parent.saved_passwords.append(password_field_value)
 
 
         with open("passman.txt", "at") as data:
