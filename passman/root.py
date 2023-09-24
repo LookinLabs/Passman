@@ -215,6 +215,8 @@ class App(tk.Tk):
 
         self.password_value.set(data.fetchall()[0][0])
 
+        db_connection.close()
+
         self.button_update_password.config(state="normal")
 
 
