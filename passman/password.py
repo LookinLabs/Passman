@@ -146,7 +146,7 @@ class WindowNewPassword(tk.Toplevel):
 
         password_field_value = self.new_password_field.get()
 
-        new_password_data = (password_address_value, password_name_value, password_field_value)
+        new_password_data = [(password_address_value, password_name_value, password_field_value)]
 
         connection = sqlite3.connect("passman.db")
 
