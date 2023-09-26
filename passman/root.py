@@ -183,6 +183,14 @@ class App(tk.Tk):
         )
 
 
+        self.password_description = TextGenerator(
+            master=self.frame_password_handling,
+            width=30,
+            x=style.x_margin,
+            y=style.y_password_description
+        )
+
+
         self.button_close_window = ButtonGenerator(
             master=self.frame_password_handling,
             text="Close",

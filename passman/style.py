@@ -12,7 +12,7 @@ height_button = 24
 
 frame_border = 3
 
-width_frame_password_list = x / 2 - 10
+width_frame_password_list = x // 2 - 10
 
 width_password_list = x / 2 - 30
 
@@ -39,6 +39,10 @@ y_button_show_password = y_password_name + 40
 x_button_update_password = x_margin + width_button + 20
 
 x_button_delete_password = width_password_field + 200
+
+width_password_description = width_frame_password_list - 200
+
+y_password_description = y_button_show_password + 40
 
 x_window_password_new = 320
 

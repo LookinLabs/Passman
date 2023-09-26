@@ -27,6 +27,10 @@ class WindowNewPassword(tk.Toplevel):
 
         self.new_password_field = tk.StringVar()
 
+        self.new_password_description = tk.StringVar()
+
+        self.new_password_description.set("")
+
 
         self.new_password_address_label = LabelGenerator(
             master=self,
@@ -146,13 +150,15 @@ class WindowNewPassword(tk.Toplevel):
 
         password_field_value = self.new_password_field.get()
 
-        new_password_data = [(password_address_value, password_name_value, password_field_value)]
+        password_description_value = self.new_password_field.get()
+
+        new_password_data = [(password_address_value, password_name_value, password_field_value, password_description_value)]
 
         connection = sqlite3.connect("passman.db")
 
         cursor = connection.cursor()
 
-        cursor.executemany("INSERT INTO passman (password_address, password_name, password) VALUES (?,?,?)", new_password_data)
+        cursor.executemany("INSERT INTO passman (password_address, password_name, password) VALUES (?,?,?,?)", new_password_data)
 
         connection.commit()
 
@@ -160,10 +166,6 @@ class WindowNewPassword(tk.Toplevel):
 
         self.parent.password_list.insert(tk.END, password_name_value + " " + password_address_value)
 
-
-        with open("passman.txt", "at") as data:
-
-            data.write(f"{password_name_value}:{password_field_value}")
 
         self.destroy()
 

@@ -49,7 +49,7 @@ class EntryGenerator(tk.Entry):
 
 class TextGenerator(tk.Text):
 
-    def __init__(self, master, width, x, y, height=3):
+    def __init__(self, master, width, x, y, height=6):
 
         super().__init__(master)
 
