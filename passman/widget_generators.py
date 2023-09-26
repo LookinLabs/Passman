@@ -49,7 +49,7 @@ class EntryGenerator(tk.Entry):
 
 class TextGenerator(tk.Text):
 
-    def __init__(self, master, width, x, y, height=6):
+    def __init__(self, master, width, x, y, height=3):
 
         super().__init__(master)
 
@@ -65,6 +65,10 @@ class NotificationGenerator(tk.Toplevel):
         super().__init__()
 
         self.title(title)
+
+        self.resizable(False, False)
+
+        self.geometry("300x200")
 
         self.message_label = LabelGenerator(
             master=self,
