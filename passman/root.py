@@ -152,7 +152,7 @@ class App(tk.Tk):
         self.button_delete_password = ButtonGenerator(
             master=self.frame_password_handling,
             text="Delete",
-            command=self.create_delete_password_window,
+            command=self.__create_delete_password_window,
             x=style.x_button_delete_password,
             y=style.y_password_field,
             width=style.width_button,
@@ -175,7 +175,7 @@ class App(tk.Tk):
             master=self.frame_password_handling,
             text="Edit",
             state="disabled", 
-            command=self.update_password,
+            command=self.__update_password,
             x=style.x_button_update_password,
             y=style.y_button_show_password,
             width=style.width_button,
@@ -194,7 +194,7 @@ class App(tk.Tk):
         )
 
 
-    def create_delete_password_window(self):
+    def __create_delete_password_window(self):
 
         print(self.password_list.curselection())
 
@@ -225,7 +225,7 @@ class App(tk.Tk):
         self.button_update_password.config(state="normal")
 
 
-    def update_password(self):
+    def __update_password(self):
 
         if self.password_field["state"] == "disabled":
 
