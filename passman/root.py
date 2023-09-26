@@ -183,6 +183,8 @@ class App(tk.Tk):
         )
 
 
+        self.password_description = tk.StringVar()
+
         self.password_description = TextGenerator(
             master=self.frame_password_handling,
             width=30,
@@ -204,8 +206,6 @@ class App(tk.Tk):
 
     def __create_delete_password_window(self):
 
-        print(self.password_list.curselection())
-
         password_index = self.password_list.curselection()[0] + 1
 
         WindowDeletePassword(password_index)
@@ -224,9 +224,15 @@ class App(tk.Tk):
         
         cursor = db_connection.cursor()
         
-        data = cursor.execute(f"SELECT password FROM passman WHERE password_name = '{password_list_value[0]}' AND password_address = '{password_list_value[1]}';")
+        data = cursor.execute(f"SELECT password, password_description FROM passman WHERE password_name = '{password_list_value[0]}' AND password_address = '{password_list_value[1]}';")
 
-        self.password_value.set(data.fetchall()[0][0])
+        fetched_data = data.fetchall()
+
+        self.password_value.set(fetched_data[0][0])
+
+        self.password_description.delete("1.0", tk.END)
+
+        self.password_description.insert(tk.END, fetched_data[0][1])
 
         db_connection.close()
 

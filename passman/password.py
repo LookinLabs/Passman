@@ -158,7 +158,7 @@ class WindowNewPassword(tk.Toplevel):
 
         cursor = connection.cursor()
 
-        cursor.executemany("INSERT INTO passman (password_address, password_name, password) VALUES (?,?,?,?)", new_password_data)
+        cursor.executemany("INSERT INTO passman (password_address, password_name, password, password_description) VALUES (?,?,?,?)", new_password_data)
 
         connection.commit()
 
