@@ -158,7 +158,7 @@ class WindowNewPassword(tk.Toplevel):
 
         connection.close()
 
-        self.parent.password_list.insert(tk.END, password_name_value)
+        self.parent.password_list.insert(tk.END, password_name_value + " " + password_address_value)
 
 
         with open("passman.txt", "at") as data:
