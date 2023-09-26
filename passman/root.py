@@ -141,7 +141,8 @@ class App(tk.Tk):
         self.password_field = EntryGenerator(
             master=self.frame_password_handling, 
             width=style.width_password_field, 
-            show="*", 
+            show="*",
+            state=tk.DISABLED,
             textvariable=self.password_value,
             x=style.x_margin,
             y=style.y_password_field
