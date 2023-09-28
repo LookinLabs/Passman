@@ -163,7 +163,7 @@ class App(tk.Tk):
         self.button_show_password = ButtonGenerator(
             master=self.frame_password_handling,
             text="Show",
-            command=lambda: toggle_password(self.password_field),
+            command=lambda: toggle_password(self.password_field, self.button_show_password),
             x=style.x_margin,
             y=style.y_button_show_password,
             width=style.width_button,

@@ -1,12 +1,20 @@
-def toggle_password(entry):
+import tkinter as tk
+
+
+def toggle_password(entry, button):
 
     if entry["show"] == "*":
 
         entry["show"] = ""
 
+        button.config(text="Hide")
+
     else:
 
         entry["show"] = "*"
+
+        button.config(text="Show")
+
 
 
 # """Password validation."""
