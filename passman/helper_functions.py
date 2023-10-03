@@ -1,3 +1,5 @@
+import sqlite3
+
 def toggle_password(entry, button):
 
     if entry["show"] == "*":
@@ -231,3 +233,17 @@ class PasswordValidation:
         falsy_validators = (name_in_password, birthday)
 
         return all(validators) and not all(falsy_validators)
+    
+
+class DatabaseConnection:
+
+    def __init__(self) -> None:
+        
+        self.connection = sqlite3.connect("passman.db")
+
+        cursor = self.connection.cursor()
+
+    
+    def __del__(self) -> None:
+
+        self.connection.close()
