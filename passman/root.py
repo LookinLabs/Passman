@@ -1,6 +1,6 @@
 import tkinter as tk
-import sqlite3
 import style
+import database
 from widget_generators import *
 from tkinter import ttk
 from password import WindowNewPassword, WindowDeletePassword
@@ -77,30 +77,9 @@ class App(tk.Tk):
 
     def __fetch(self):
 
-        connection = sqlite3.connect("passman.db")
+        db = database.DatabaseConnection()
 
-        cursor = connection.cursor()
-
-        # cursor.execute("CREATE TABLE passman (id INTEGER PRIMARY KEY AUTOINCREMENT, password_address TEXT, password_name TEXT, password TEXT, password_description TEXT DEFAULT NULL, password_update DATETIME DEFAULT CURRENT_TIMESTAMP)") # How to add timestamp?
-
-        # passwords = [
-        #     ("hh.ee", "haha", "12345678"),
-        #     ("asdfg.com", "asdfg", "123412")
-        # ]
-
-        # cursor.executemany("INSERT INTO passman (password_address, password_name, password) VALUES (?,?,?)", passwords)
-
-        # connection.commit()
-
-        # for row in cursor.execute("SELECT * FROM passman"):
-
-        #     print(row)
-        for row in cursor.execute("SELECT password_name, password_address FROM passman"):
-
-            self.password_list.insert(tk.END, f"{row[0]} {row[1]}")
-
-
-        connection.close()
+        db.fill_listbox(self.password_list)
 
 
     def __initialize_password_handling_frame(self):
@@ -220,21 +199,13 @@ class App(tk.Tk):
 
         password_list_value = self.password_list.get(self.password_list.curselection()).split(" ")
 
-        db_connection = sqlite3.connect("passman.db")
-        
-        cursor = db_connection.cursor()
-        
-        data = cursor.execute(f"SELECT password, password_description FROM passman WHERE password_name = '{password_list_value[0]}' AND password_address = '{password_list_value[1]}';")
+        print(password_list_value)
 
-        fetched_data = data.fetchall()
+        SQL_query_password_data = f"SELECT password, password_description FROM passman WHERE password_name = '{password_list_value[0]}' AND password_address = '{password_list_value[1]}';"
 
-        self.password_value.set(fetched_data[0][0])
+        db = database.DatabaseConnection()
 
-        self.password_description.delete("1.0", tk.END)
-
-        self.password_description.insert(tk.END, fetched_data[0][1])
-
-        db_connection.close()
+        db.fetch_password_data(SQL_query_password_data, self.password_value, self.password_description)
 
         self.button_update_password.config(state="normal")
 

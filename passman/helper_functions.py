@@ -1,4 +1,5 @@
 import sqlite3
+import tkinter as tk
 
 def toggle_password(entry, button):
 
@@ -233,17 +234,3 @@ class PasswordValidation:
         falsy_validators = (name_in_password, birthday)
 
         return all(validators) and not all(falsy_validators)
-    
-
-class DatabaseConnection:
-
-    def __init__(self) -> None:
-        
-        self.connection = sqlite3.connect("passman.db")
-
-        cursor = self.connection.cursor()
-
-    
-    def __del__(self) -> None:
-
-        self.connection.close()
