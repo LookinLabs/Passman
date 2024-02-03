@@ -1,6 +1,6 @@
 import tkinter as tk
 import style
-import database
+from database import *
 from widget_generators import *
 from tkinter import ttk
 from password import WindowNewPassword, WindowDeletePassword
@@ -23,10 +23,10 @@ class App(tk.Tk):
         self.__fetch()
 
 
-        self.__initialize_password_handling_frame()
-
-
         self.password_value_index = 0        
+        
+        
+        self.__initialize_password_handling_frame()
 
 
         self.mainloop()
@@ -77,7 +77,7 @@ class App(tk.Tk):
 
     def __fetch(self):
 
-        db = database.DatabaseConnection()
+        db = DatabaseConnection()
 
         db.fill_listbox(self.password_list)
 
@@ -203,7 +203,7 @@ class App(tk.Tk):
 
         SQL_query_password_data = f"SELECT password, password_description FROM passman WHERE password_name = '{password_list_value[0]}' AND password_address = '{password_list_value[1]}';"
 
-        db = database.DatabaseConnection()
+        db = DatabaseConnection()
 
         db.fetch_password_data(SQL_query_password_data, self.password_value, self.password_description)
 
@@ -232,7 +232,7 @@ class App(tk.Tk):
 
             db_connection.commit()
 
-            db_connection.close()
+            del db_connection
 
             self.password_field.config(state="disabled")
 

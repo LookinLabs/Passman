@@ -15,20 +15,25 @@ class DatabaseConnection:
             
         SQL_query = "SELECT password_name, password_address FROM passman"
 
-        # cursor.execute("CREATE TABLE passman (id INTEGER PRIMARY KEY AUTOINCREMENT, password_address TEXT, password_name TEXT, password TEXT, password_description TEXT DEFAULT NULL, password_update DATETIME DEFAULT CURRENT_TIMESTAMP)") # How to add timestamp?
+        try:
+            self.cursor.execute("CREATE TABLE passman (id INTEGER PRIMARY KEY AUTOINCREMENT, password_address TEXT, password_name TEXT, password TEXT, password_description TEXT DEFAULT NULL, password_update DATETIME DEFAULT CURRENT_TIMESTAMP)") # How to add timestamp?
 
-        # passwords = [
-        #     ("hh.ee", "haha", "12345678"),
-        #     ("asdfg.com", "asdfg", "123412")
-        # ]
+            passwords = [
+                ("hh.ee", "haha", "12345678"),
+                ("asdfg.com", "asdfg", "123412")
+            ]
 
-        # cursor.executemany("INSERT INTO passman (password_address, password_name, password) VALUES (?,?,?)", passwords)
+            self.cursor.executemany("INSERT INTO passman (password_address, password_name, password) VALUES (?,?,?)", passwords)
 
-        # connection.commit()
+            self.connection.commit()
 
-        # for row in cursor.execute("SELECT * FROM passman"):
+            for row in self.cursor.execute("SELECT * FROM passman"):
 
-        #     print(row)
+                print(row)
+
+        except:
+
+            print("Such table already exists")
 
         for row in self.cursor.execute(SQL_query):
         
