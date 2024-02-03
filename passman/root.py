@@ -20,7 +20,7 @@ class App(tk.Tk):
         self.__initialize_password_list_frame()
 
 
-        self.__fetch()
+        self.__fill_listbox()
 
 
         self.password_value_index = 0        
@@ -75,11 +75,15 @@ class App(tk.Tk):
         self.password_list.bind("<<ListboxSelect>>", self.__get_password)
 
 
-    def __fetch(self):
+    def __fill_listbox(self):
 
         db = DatabaseConnection()
 
-        db.fill_listbox(self.password_list)
+        listbox_data = db.fetch_data()
+
+        for row in listbox_data:
+        
+            self.password_list.insert(tk.END, f"{row[0]} {row[1]:>10}")
 
 
     def __initialize_password_handling_frame(self):
@@ -199,9 +203,7 @@ class App(tk.Tk):
 
         password_list_value = self.password_list.get(self.password_list.curselection()).split(" ")
 
-        print(password_list_value)
-
-        SQL_query_password_data = f"SELECT password, password_description FROM passman WHERE password_name = '{password_list_value[0]}' AND password_address = '{password_list_value[1]}';"
+        SQL_query_password_data = f"SELECT password, password_description FROM passman WHERE password_name = '{password_list_value[0]}' AND password_address = '{password_list_value[2]}';"
 
         db = DatabaseConnection()
 
