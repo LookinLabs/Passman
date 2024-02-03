@@ -243,4 +243,6 @@ class App(tk.Tk):
             self.button_update_password.config(text="Edit")
 
 
-App()
+if __name__ == "__main__":
+    
+    App()
