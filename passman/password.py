@@ -131,7 +131,7 @@ class WindowNewPassword(tk.Toplevel):
         self.button_show_new_password = ButtonGenerator(
             master=self,
             text="Show",
-            command=lambda: helper_functions.toggle_password(self.new_password_field),
+            command=lambda: helper_functions.toggle_password(self.new_password_field, self.button_show_new_password),
             x=style.x_button_show_new_password,
             y=style.y_new_password_field,
             width=style.width_button,
