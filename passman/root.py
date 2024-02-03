@@ -83,7 +83,7 @@ class App(tk.Tk):
 
         for row in listbox_data:
         
-            self.password_list.insert(tk.END, f"{row[0]} {row[1]:>10}")
+            self.password_list.insert(tk.END, f"{row[0]} {row[1]}")
 
 
     def __initialize_password_handling_frame(self):
@@ -201,9 +201,9 @@ class App(tk.Tk):
 
     def __get_password(self, *args):
 
-        password_list_value = self.password_list.get(self.password_list.curselection()).split(" ")
+        password_list_value = self.password_list.get(self.password_list.curselection()).split()
 
-        SQL_query_password_data = f"SELECT password, password_description FROM passman WHERE password_name = '{password_list_value[0]}' AND password_address = '{password_list_value[2]}';"
+        SQL_query_password_data = f"SELECT password, password_description FROM passman WHERE password_name = '{password_list_value[0]}' AND password_address = '{password_list_value[1]}';"
 
         db = DatabaseConnection()
 
