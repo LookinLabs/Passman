@@ -135,6 +135,7 @@ class App(tk.Tk):
         self.button_delete_password = ButtonGenerator(
             master=self.frame_password_handling,
             text="Delete",
+            state="disabled",
             command=self.__create_delete_password_window,
             x=style.x_button_delete_password,
             y=style.y_password_field,
@@ -146,6 +147,7 @@ class App(tk.Tk):
         self.button_show_password = ButtonGenerator(
             master=self.frame_password_handling,
             text="Show",
+            state="disabled",
             command=lambda: toggle_password(self.password_field, self.button_show_password),
             x=style.x_margin,
             y=style.y_button_show_password,
@@ -210,6 +212,10 @@ class App(tk.Tk):
         db.fetch_password_data(SQL_query_password_data, self.password_value, self.password_description)
 
         self.button_update_password.config(state="normal")
+
+        self.button_show_password.config(state="normal")
+
+        self.button_delete_password.config(state="normal")
 
 
     def __update_password(self):
