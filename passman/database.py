@@ -18,13 +18,6 @@ class DatabaseConnection:
         try:
             self.cursor.execute("CREATE TABLE passman (id INTEGER PRIMARY KEY AUTOINCREMENT, password_address TEXT, password_name TEXT, password TEXT, password_description TEXT DEFAULT NULL, password_update DATETIME DEFAULT CURRENT_TIMESTAMP)") # How to add timestamp?
 
-            passwords = [
-                ("hh.ee", "haha", "12345678", "this password's description"),
-                ("asdfg.com", "asdfg", "123412", "other description")
-            ]
-
-            self.cursor.executemany("INSERT INTO passman (password_address, password_name, password, password_description) VALUES (?,?,?,?)", passwords)
-
             self.connection.commit()
 
             for row in self.cursor.execute("SELECT * FROM passman;"):
