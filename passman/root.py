@@ -77,6 +77,8 @@ class App(tk.Tk):
 
     def __fill_listbox(self):
 
+        self.password_list.delete(0, tk.END)
+        
         db = DatabaseConnection()
 
         listbox_data = db.fetch_data()
@@ -136,7 +138,7 @@ class App(tk.Tk):
             master=self.frame_password_handling,
             text="Delete",
             state="disabled",
-            command=self.__create_delete_password_window,
+            command=self.__delete_password,
             x=style.x_button_delete_password,
             y=style.y_password_field,
             width=style.width_button,
@@ -189,11 +191,11 @@ class App(tk.Tk):
         )
 
 
-    def __create_delete_password_window(self):
+    def __delete_password(self):
 
-        password_index = self.password_list.curselection()[0] + 1
+        password_index = self.password_list.curselection()[0]
 
-        WindowDeletePassword(password_index)
+        return WindowDeletePassword(password_index, self)
 
     
     def __create_new_password_window(self):

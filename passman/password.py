@@ -2,6 +2,7 @@ import tkinter as tk
 import sqlite3
 import style
 from widget_generators import *
+from database import DatabaseConnection
 import helper_functions
 
 
@@ -181,9 +182,11 @@ class WindowNewPassword(tk.Toplevel):
 
 class WindowDeletePassword:
 
-    def __init__(self, index):
+    def __init__(self, index, parent):
 
         self.index = index
+
+        self.parent = parent
 
         self.window_delete_password = ConfirmationGenerator(
             "password deletion",
@@ -222,16 +225,26 @@ class WindowDeletePassword:
 
     def confirm_password_deletion(self):
 
+        self.parent.password_list.delete(0, tk.END)
+        
         connection = sqlite3.connect("passman.db")
 
         cursor = connection.cursor()
+
+        print(self.index)
         
-        cursor.execute(f"DELETE FROM passman WHERE id = '{self.index}';")
+        cursor.execute(f"DELETE FROM passman WHERE id = {self.index};")
 
         connection.commit()
-
-        connection.close()
         
+        listbox_data = cursor.execute("SELECT password_name, password_address FROM passman;")
+
+        for row in listbox_data:
+        
+            self.parent.password_list.insert(tk.END, f"{row[0]} {row[1]}")
+        
+        connection.close()
+
         self.notification_window = NotificationGenerator(text="Password successfully deleted!")
 
         self.window_delete_password.destroy()
