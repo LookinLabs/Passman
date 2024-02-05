@@ -21,4 +21,18 @@ def test_data_addition():
     connection.close()
 
 
+def test_data_presence():
+
+    connection = sqlite3.connect("./passman.db")
+
+    cursor = connection.cursor()
+
+    for row in cursor.execute("SELECT * FROM passman;"):
+
+        print(row)
+
+    connection.close()
+
 test_data_addition()
+
+test_data_presence()
