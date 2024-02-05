@@ -193,9 +193,7 @@ class App(tk.Tk):
 
     def __delete_password(self):
 
-        password_index = self.password_list.curselection()[0]
-
-        return WindowDeletePassword(password_index, self)
+        return WindowDeletePassword(self)
 
     
     def __create_new_password_window(self):
@@ -205,9 +203,11 @@ class App(tk.Tk):
 
     def __get_password(self, *args):
 
-        password_list_value = self.password_list.get(self.password_list.curselection()).split()
+        self.password_list_value = self.password_list.get(self.password_list.curselection())
 
-        SQL_query_password_data = f"SELECT password, password_description FROM passman WHERE password_name = '{password_list_value[0]}' AND password_address = '{password_list_value[1]}';"
+        current_password = self.password_list_value.split()
+
+        SQL_query_password_data = f"SELECT password, password_description FROM passman WHERE password_name = '{current_password[0]}' AND password_address = '{current_password[1]}';"
 
         db = DatabaseConnection()
 

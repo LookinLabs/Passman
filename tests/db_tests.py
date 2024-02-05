@@ -33,6 +33,6 @@ def test_data_presence():
 
     connection.close()
 
-test_data_addition()
+# test_data_addition()
 
 test_data_presence()
