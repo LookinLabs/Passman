@@ -60,7 +60,7 @@ class TextGenerator(tk.Text):
 
 class NotificationGenerator(tk.Toplevel):
 
-    def __init__(self, text, title="notification"):
+    def __init__(self, text, title="Notification"):
 
         super().__init__()
 
@@ -69,6 +69,8 @@ class NotificationGenerator(tk.Toplevel):
         self.resizable(False, False)
 
         self.geometry("300x200")
+
+        self.grab_set()
 
         self.message_label = LabelGenerator(
             master=self,
@@ -85,6 +87,11 @@ class NotificationGenerator(tk.Toplevel):
             y=style.y_button_message,
             width=style.width_button, 
             height=style.height_button)
+        
+    
+    def __del__(self):
+
+        self.grab_release()
 
 
 class ConfirmationGenerator(tk.Toplevel):
@@ -96,3 +103,10 @@ class ConfirmationGenerator(tk.Toplevel):
         self.title(title)
 
         self.minsize(width=style.x_window_password_delete, height=style.y_window_password_delete)
+
+        self.grab_set()
+
+    
+    def __del__(self):
+
+        self.grab_release()

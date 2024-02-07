@@ -32,6 +32,8 @@ class WindowNewPassword(tk.Toplevel):
 
         self.new_password_description.set("")
 
+        self.grab_set()
+
 
         self.new_password_address_label = LabelGenerator(
             master=self,
@@ -121,7 +123,7 @@ class WindowNewPassword(tk.Toplevel):
         self.button_cancel_new_password = ButtonGenerator(
             master=self,
             text="Cancel",
-            command=self.destroy,
+            command=self.__cancel_new_password,
             x=style.x_button_cancel_new_password,
             y=style.y_button_save_new_password,
             width=style.width_button,
@@ -167,17 +169,21 @@ class WindowNewPassword(tk.Toplevel):
 
         self.parent.password_list.insert(tk.END, password_name_value + " " + password_address_value)
 
-
-        self.destroy()
-
-
         self.window_message = NotificationGenerator(
             title = "Notification",
             text="Password successfully added",
         )
 
-
         self.window_message.mainloop()
+        
+        self.destroy()
+
+
+    def __cancel_new_password(self):
+
+        self.grab_release()
+
+        self.destroy()
 
 
 class WindowDeletePassword():
