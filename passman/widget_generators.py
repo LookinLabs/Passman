@@ -68,7 +68,7 @@ class NotificationGenerator(tk.Toplevel):
 
         self.resizable(False, False)
 
-        self.geometry("300x200")
+        self.geometry(f"300x200+400+400")
 
         self.grab_set()
 
@@ -103,6 +103,8 @@ class ConfirmationGenerator(tk.Toplevel):
         self.title(title)
 
         self.minsize(width=style.x_window_password_delete, height=style.y_window_password_delete)
+
+        self.geometry(f"300x200+400+400")
 
         self.grab_set()
 
