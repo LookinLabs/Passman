@@ -3,7 +3,21 @@ import sqlite3
 import style
 from widget_generators import *
 from database import DatabaseConnection
+from pysqlitecypher import sqlitewrapper
 import helper_functions
+
+
+# class WindowWelcome(tk.Toplevel):
+
+#     def __init__(self):
+
+#         self.db = sqlitewrapper.SqliteCipher(
+#             dataBasePath="passman.db",
+#             checkSameThread=False, 
+#             password=None
+#         )
+
+
 
 
 class WindowNewPassword(tk.Toplevel):
