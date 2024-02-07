@@ -2,7 +2,6 @@ import tkinter as tk
 import style
 from database import *
 from widget_generators import *
-from tkinter import ttk
 from password import WindowNewPassword, WindowDeletePassword
 from helper_functions import toggle_password
 
@@ -90,7 +89,7 @@ class App(tk.Tk):
 
     def __initialize_password_handling_frame(self):
 
-        self.frame_password_handling = ttk.Frame(
+        self.frame_password_handling = tk.ttk.Frame(
             master=self,
         )
 
