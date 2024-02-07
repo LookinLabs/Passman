@@ -19,8 +19,9 @@ class WindowNewPassword(tk.Toplevel):
         
         self.resizable(False, False)
 
-
         self.parent = parent
+
+        self.geometry("+%d+%d" %(self.parent.winfo_x() // 4 +style.x_window_password_new, self.parent.winfo_y() // 4 +style.y_window_password_new))
 
         self.new_password_address = tk.StringVar()
         
@@ -204,7 +205,6 @@ class WindowDeletePassword():
             x=style.x_window_password_delete / 2 - style.width_label_password_delete / 2,
             y=10,
         )
-        
 
         self.button_save_password = ButtonGenerator(
             master=self.window_delete_password,
