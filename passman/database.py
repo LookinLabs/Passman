@@ -5,7 +5,7 @@ import sqlite3
 class DatabaseConnection:
 
     def __init__(self) -> None:
-        
+        # durectory should be C:\Users\<username>\AppData\Roaming\<directory_name>
         self.connection = sqlite3.connect("passman.db")
 
         self.cursor = self.connection.cursor()
