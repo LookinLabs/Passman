@@ -1,53 +1,60 @@
 import tkinter as tk
 import sqlite3
+import models as md
 
 
 class DatabaseConnection:
 
     def __init__(self) -> None:
         # durectory should be C:\Users\<username>\AppData\Roaming\<directory_name>
-        self.connection = sqlite3.connect("passman.db")
-
-        self.cursor = self.connection.cursor()
+        md.db.connect()
 
 
-    def fetch_data(self):
-            
-        SQL_query = "SELECT password_name, password_address FROM passman"
+        self.create_passwords_table()
+
+
+    def create_passwords_table(self):
 
         try:
-            self.cursor.execute("CREATE TABLE passman (id INTEGER PRIMARY KEY AUTOINCREMENT, password_address TEXT, password_name TEXT, password TEXT, password_description TEXT DEFAULT NULL, password_update DATETIME DEFAULT CURRENT_TIMESTAMP)") # How to add timestamp?
-
-            self.connection.commit()
-
-            for row in self.cursor.execute("SELECT * FROM passman;"):
-
-                print(row)
+            md.db.create_tables([md.Password])
 
         except:
 
             print("Such table already exists")
 
-        db_data =  self.cursor.execute(SQL_query)
+    def add_password(self, new_p_address, new_p_name, new_p, new_p_description):
+
+        new_password = md.Password.create(
+                        password_address=new_p_address,
+                        password_name=new_p_name,
+                        password=new_p,
+                        password_description=new_p_description
+                    )
+        
+        new_password.save()
+
+
+    def fetch_data(self):
+            
+        db_data = md.Password.select(md.Password.password_name, md.Password.password_address)
 
         return db_data
 
 
-    def fetch_password_data(self, sql_query, password_data, description_field):
+    def fetch_password_data(self, sql_data):
 
-        data = self.cursor.execute(sql_query)
+        password_data = sql_data.split()
 
-        fetched_data = data.fetchall()
+        result = md.Password.select().where(md.Password.password_name == password_data[0] & md.Password.password_address == password_data[1])
 
-        password_data.set(fetched_data[0][0])
-
-        description_field.delete("1.0", tk.END)
-
-        description_field.insert(tk.END, fetched_data[0][1])
+        return result
 
 
+    def delete_password(self, sql_data):
+
+        pass
 
 
     def __del__(self) -> None:
 
-        self.connection.close()
+        md.db.close()

@@ -1,6 +1,6 @@
 import tkinter as tk
 import style
-from database import *
+from database import DatabaseConnection
 from widget_generators import *
 from password import WindowNewPassword, WindowDeletePassword
 from helper_functions import toggle_password
@@ -15,9 +15,9 @@ class App(tk.Tk):
 
         self.__initialize_main_window()
 
-
         self.__initialize_password_list_frame()
 
+        self.dc = DatabaseConnection()
 
         self.__fill_listbox()
 
@@ -77,10 +77,8 @@ class App(tk.Tk):
     def __fill_listbox(self):
 
         self.password_list.delete(0, tk.END)
-        
-        db = DatabaseConnection()
 
-        listbox_data = db.fetch_data()
+        listbox_data = self.dc.fetch_data()
 
         for row in listbox_data:
         
@@ -204,13 +202,13 @@ class App(tk.Tk):
 
         self.password_list_value = self.password_list.get(self.password_list.curselection())
 
-        current_password = self.password_list_value.split()
+        password_data = self.dc.fetch_password_data(self.password_list.value)
 
-        SQL_query_password_data = f"SELECT password, password_description FROM passman WHERE password_name = '{current_password[0]}' AND password_address = '{current_password[1]}';"
+        self.password_value.set(password_data[0][0])
 
-        db = DatabaseConnection()
+        self.password_description.delete("1.0", tk.END)
 
-        db.fetch_password_data(SQL_query_password_data, self.password_value, self.password_description)
+        self.password_description.insert(tk.END, password_data[0][1])
 
         self.button_update_password.config(state="normal")
 

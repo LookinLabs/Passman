@@ -3,7 +3,6 @@ import sqlite3
 import style
 from widget_generators import *
 from database import DatabaseConnection
-from pysqlitecypher import sqlitewrapper
 import helper_functions
 
 
@@ -160,38 +159,38 @@ class WindowNewPassword(tk.Toplevel):
         self.mainloop()
 
 
-    def __save_new_password(self):
+    # def __save_new_password(self):
 
-        password_address_value = self.new_password_address.get()
+    #     password_address_value = self.new_password_address.get()
 
-        password_name_value = self.new_password_name.get()
+    #     password_name_value = self.new_password_name.get()
 
-        password_field_value = self.new_password_field.get()
+    #     password_field_value = self.new_password_field.get()
 
-        password_description_value = self.new_password_field.get()
+    #     password_description_value = self.new_password_field.get()
 
-        new_password_data = [(password_address_value, password_name_value, password_field_value, password_description_value)]
+    #     new_password_data = [(password_address_value, password_name_value, password_field_value, password_description_value)]
 
-        connection = sqlite3.connect("passman.db")
+    #     connection = sqlite3.connect("passman.db")
 
-        cursor = connection.cursor()
+    #     cursor = connection.cursor()
 
-        cursor.executemany("INSERT INTO passman (password_address, password_name, password, password_description) VALUES (?,?,?,?)", new_password_data)
+    #     cursor.executemany("INSERT INTO passman (password_address, password_name, password, password_description) VALUES (?,?,?,?)", new_password_data)
 
-        connection.commit()
+    #     connection.commit()
 
-        connection.close()
+    #     connection.close()
 
-        self.parent.password_list.insert(tk.END, password_name_value + " " + password_address_value)
+    #     self.parent.password_list.insert(tk.END, password_name_value + " " + password_address_value)
 
-        self.window_message = NotificationGenerator(
-            title = "Notification",
-            text="Password successfully added",
-        )
+    #     self.window_message = NotificationGenerator(
+    #         title = "Notification",
+    #         text="Password successfully added",
+    #     )
 
-        self.window_message.mainloop()
+    #     self.window_message.mainloop()
         
-        self.destroy()
+    #     self.destroy()
 
 
     def __cancel_new_password(self):
@@ -241,29 +240,29 @@ class WindowDeletePassword():
             height=25
         )
 
-    def confirm_password_deletion(self):
+    # def confirm_password_deletion(self):
 
-        self.parent.password_list.delete(0, tk.END)
+    #     self.parent.password_list.delete(0, tk.END)
 
-        password_values_list = self.parent.password_list_value.split()
+    #     password_values_list = self.parent.password_list_value.split()
         
-        connection = sqlite3.connect("passman.db")
+    #     connection = sqlite3.connect("passman.db")
 
-        cursor = connection.cursor()
+    #     cursor = connection.cursor()
         
-        cursor.execute(f"DELETE FROM passman WHERE password_name = '{password_values_list[0]}' AND password_address = '{password_values_list[1]}';")
+    #     cursor.execute(f"DELETE FROM passman WHERE password_name = '{password_values_list[0]}' AND password_address = '{password_values_list[1]}';")
 
-        connection.commit()
+    #     connection.commit()
         
-        listbox_data = cursor.execute("SELECT password_name, password_address FROM passman;")
+    #     listbox_data = cursor.execute("SELECT password_name, password_address FROM passman;")
 
-        for row in listbox_data:
+    #     for row in listbox_data:
         
-            self.parent.password_list.insert(tk.END, f"{row[0]} {row[1]}")
+    #         self.parent.password_list.insert(tk.END, f"{row[0]} {row[1]}")
         
-        connection.close()
+    #     connection.close()
 
-        self.notification_window = NotificationGenerator(text="Password successfully deleted!")
+    #     self.notification_window = NotificationGenerator(text="Password successfully deleted!")
 
-        self.window_delete_password.destroy()
+    #     self.window_delete_password.destroy()
     
