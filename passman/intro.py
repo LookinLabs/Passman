@@ -1,17 +1,17 @@
 import tkinter as tk
 import sqlite3
 import style
+import models as md
 from widget_generators import *
-from database import DatabaseConnection
-from pysqlitecypher import sqlitewrapper
+import database as dc
 import helper_functions
 
 
 TABLE_NAME = "passman"
 
 
-class WindowWelcome(tk.Toplevel):
+class WindowIntro(tk.Toplevel):
 
     def __init__(self):
 
-        pass
+        dc.create_passwords_table()

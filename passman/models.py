@@ -23,14 +23,10 @@ class Password(Model):
         database = db
 
 
-db.connect()
+# example1 = Password.create(password_address="hh.ee", password_name="gaga", password="01234567", password_description="this password's description")
 
-db.create_tables([Password])
+# example1.save()
 
-example1 = Password.create(password_address="hh.ee", password_name="gaga", password="01234567", password_description="this password's description")
+# example2 = Password.create(password_address="asdfg.com", password_name="asdfg", password="123412", password_description="other description")
 
-example1.save()
-
-example2 = Password.create(password_address="asdfg.com", password_name="asdfg", password="123412", password_description="other description")
-
-example2.save()
+# example2.save()
