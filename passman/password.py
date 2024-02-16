@@ -1,5 +1,4 @@
 import tkinter as tk
-import sqlite3
 import style
 from widget_generators import *
 from database import DatabaseConnection
@@ -159,38 +158,28 @@ class WindowNewPassword(tk.Toplevel):
         self.mainloop()
 
 
-    # def __save_new_password(self):
+    def __save_new_password(self):
 
-    #     password_address_value = self.new_password_address.get()
+        password_address_value = self.new_password_address.get()
 
-    #     password_name_value = self.new_password_name.get()
+        password_name_value = self.new_password_name.get()
 
-    #     password_field_value = self.new_password_field.get()
+        password_field_value = self.new_password_field.get()
 
-    #     password_description_value = self.new_password_field.get()
+        password_description_value = self.new_password_field.get()
 
-    #     new_password_data = [(password_address_value, password_name_value, password_field_value, password_description_value)]
+        self.parent.dc.add_password(password_address_value, password_name_value, password_field_value, password_description_value)
 
-    #     connection = sqlite3.connect("passman.db")
+        self.parent.password_list.insert(tk.END, password_name_value + " " + password_address_value)
 
-    #     cursor = connection.cursor()
+        self.window_message = NotificationGenerator(
+            title = "Notification",
+            text="Password successfully added",
+        )
 
-    #     cursor.executemany("INSERT INTO passman (password_address, password_name, password, password_description) VALUES (?,?,?,?)", new_password_data)
-
-    #     connection.commit()
-
-    #     connection.close()
-
-    #     self.parent.password_list.insert(tk.END, password_name_value + " " + password_address_value)
-
-    #     self.window_message = NotificationGenerator(
-    #         title = "Notification",
-    #         text="Password successfully added",
-    #     )
-
-    #     self.window_message.mainloop()
+        self.window_message.mainloop()
         
-    #     self.destroy()
+        self.destroy()
 
 
     def __cancel_new_password(self):
