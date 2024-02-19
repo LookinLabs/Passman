@@ -8,9 +8,6 @@ class DatabaseConnection:
         md.db.connect()
 
 
-        self.create_passwords_table()
-
-
     def create_passwords_table(self):
 
         try:

@@ -2,7 +2,7 @@ import tkinter as tk
 import style
 from database import DatabaseConnection
 from widget_generators import *
-from password import WindowNewPassword, WindowDeletePassword
+from password import *
 from helper_functions import toggle_password
 
 class App(tk.Tk):
@@ -12,6 +12,7 @@ class App(tk.Tk):
         #running the app
         super().__init__()
 
+        self.__check_db_existence()
 
         self.__initialize_main_window()
 
@@ -29,6 +30,13 @@ class App(tk.Tk):
 
 
         self.mainloop()
+
+
+    def __check_db_existence(self):
+
+        pass
+        # If db exists - nothing, else - show WindowIntro
+        WindowIntro()
 
 
     def __initialize_main_window(self):

@@ -5,15 +5,18 @@ from database import DatabaseConnection
 import helper_functions
 
 
-# class WindowWelcome(tk.Toplevel):
+class WindowIntro(tk.Toplevel):
 
-#     def __init__(self):
+    def __init__(self):
 
-#         self.db = sqlitewrapper.SqliteCipher(
-#             dataBasePath="passman.db",
-#             checkSameThread=False, 
-#             password=None
-#         )
+        super().__init__()
+        
+        self.welcome_label = LabelGenerator(
+        master=self,
+        text="Meet Passman!",
+        x=style.x_margin, 
+        y=style.y_label_password_field,
+    )
 
 
 
