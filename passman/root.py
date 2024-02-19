@@ -229,17 +229,9 @@ class App(tk.Tk):
 
         else:
 
-            password_list_value = self.password_list.get(self.password_list.curselection()).split(" ")
-
-            db_connection = sqlite3.connect("passman.db")
+            new_password_data = self.password_list.get(self.password_list.curselection())
             
-            cursor = db_connection.cursor()
-            
-            cursor.execute(f"UPDATE passman SET password = '{self.password_value.get()}' WHERE password_name = '{password_list_value[0]}' AND password_address = '{password_list_value[1]}';")
-
-            db_connection.commit()
-
-            del db_connection
+            self.dc.update_password_data(new_password_data, self.password_value.get())
 
             self.password_field.config(state="disabled")
 

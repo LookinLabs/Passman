@@ -46,6 +46,17 @@ class DatabaseConnection:
         result = md.Password.select().where((md.Password.password_name == password_data[0]) & (md.Password.password_address == password_data[1]))
 
         return result
+    
+
+    def update_password_data(self, password_data, password_value):
+        
+        splitted_data = password_data.split()
+
+        row = md.Password.get((md.Password.password_name == splitted_data[0]) & (md.Password.password_address == splitted_data[1]))
+            
+        row.password = password_value
+
+        row.save()
 
 
     def delete_password(self, p_name, p_address):
