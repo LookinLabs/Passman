@@ -37,7 +37,7 @@ class App(tk.Tk):
 
         self.geometry(f"{style.x}x{style.y}")
 
-        self.minsize(style.x, style.y)
+        self.resizable(False, False)
 
         self.eval("tk::PlaceWindow . center")
 

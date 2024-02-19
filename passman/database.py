@@ -20,6 +20,7 @@ class DatabaseConnection:
 
             print("Such table already exists")
 
+
     def add_password(self, new_p_address, new_p_name, new_p, new_p_description):
 
         new_password = md.Password.create(
