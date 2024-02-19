@@ -43,14 +43,16 @@ class DatabaseConnection:
 
         password_data = sql_data.split()
 
-        result = md.Password.select().where(md.Password.password_name == password_data[0] & md.Password.password_address == password_data[1])
+        result = md.Password.select().where((md.Password.password_name == password_data[0]) & (md.Password.password_address == password_data[1]))
 
         return result
 
 
-    def delete_password(self, sql_data):
+    def delete_password(self, p_name, p_address):
 
-        pass
+        password_info = md.Password.get(md.Password.password_name == p_name & md.Password.password_address == p_address)
+
+        password_info.delete_instance()
 
 
     def __del__(self) -> None:

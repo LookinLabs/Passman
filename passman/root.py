@@ -82,7 +82,7 @@ class App(tk.Tk):
 
         for row in listbox_data:
         
-            self.password_list.insert(tk.END, f"{row[0]} {row[1]}")
+            self.password_list.insert(tk.END, f"{row.password_name} {row.password_address}")
 
 
     def __initialize_password_handling_frame(self):
@@ -202,13 +202,13 @@ class App(tk.Tk):
 
         self.password_list_value = self.password_list.get(self.password_list.curselection())
 
-        password_data = self.dc.fetch_password_data(self.password_list.value)
+        password_data = self.dc.fetch_password_data(self.password_list_value)[0]
 
-        self.password_value.set(password_data[0][0])
+        self.password_value.set(password_data.password)
 
         self.password_description.delete("1.0", tk.END)
 
-        self.password_description.insert(tk.END, password_data[0][1])
+        self.password_description.insert(tk.END, password_data.password_description)
 
         self.button_update_password.config(state="normal")
 

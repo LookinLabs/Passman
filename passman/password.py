@@ -229,29 +229,21 @@ class WindowDeletePassword():
             height=25
         )
 
-    # def confirm_password_deletion(self):
+    def confirm_password_deletion(self):
 
-    #     self.parent.password_list.delete(0, tk.END)
+        self.parent.password_list.delete(0, tk.END)
 
-    #     password_values_list = self.parent.password_list_value.split()
+        password_values_list = self.parent.password_list_value.split()
         
-    #     connection = sqlite3.connect("passman.db")
-
-    #     cursor = connection.cursor()
+        self.parent.dc.delete_password(password_values_list[0], password_values_list[1])
         
-    #     cursor.execute(f"DELETE FROM passman WHERE password_name = '{password_values_list[0]}' AND password_address = '{password_values_list[1]}';")
+        listbox_data = self.parent.dc.fetch_data()
 
-    #     connection.commit()
+        for row in listbox_data:
         
-    #     listbox_data = cursor.execute("SELECT password_name, password_address FROM passman;")
+            self.parent.password_list.insert(tk.END, f"{row[0]} {row[1]}")
 
-    #     for row in listbox_data:
-        
-    #         self.parent.password_list.insert(tk.END, f"{row[0]} {row[1]}")
-        
-    #     connection.close()
+        self.notification_window = NotificationGenerator(text="Password successfully deleted!")
 
-    #     self.notification_window = NotificationGenerator(text="Password successfully deleted!")
-
-    #     self.window_delete_password.destroy()
+        self.window_delete_password.destroy()
     

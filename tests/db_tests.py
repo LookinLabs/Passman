@@ -27,7 +27,7 @@ def test_data_presence():
 
     cursor = connection.cursor()
 
-    for row in cursor.execute("SELECT * FROM passman;"):
+    for row in cursor.execute("SELECT * FROM password;"):
 
         print(row)
 
