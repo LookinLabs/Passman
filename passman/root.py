@@ -1,8 +1,8 @@
 import tkinter as tk
+import password as ps
 import style
 from database import DatabaseConnection
 from widget_generators import *
-from password import *
 from helper_functions import toggle_password
 
 class App(tk.Tk):
@@ -34,9 +34,8 @@ class App(tk.Tk):
 
     def __check_db_existence(self):
 
-        pass
         # If db exists - nothing, else - show WindowIntro
-        WindowIntro()
+        ps.WindowIntro()
 
 
     def __initialize_main_window(self):
@@ -198,12 +197,12 @@ class App(tk.Tk):
 
     def __delete_password(self):
 
-        return WindowDeletePassword(self)
+        return ps.WindowDeletePassword(self)
 
     
     def __create_new_password_window(self):
 
-        return WindowNewPassword(self)
+        return ps.WindowNewPassword(self)
 
 
     def __get_password(self, *args):
