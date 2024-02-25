@@ -1,8 +1,8 @@
 import tkinter as tk
+import password as ps
 import style
-from database import *
+from database import DatabaseConnection
 from widget_generators import *
-from password import WindowNewPassword, WindowDeletePassword
 from helper_functions import toggle_password
 
 class App(tk.Tk):
@@ -12,12 +12,13 @@ class App(tk.Tk):
         #running the app
         super().__init__()
 
+        self.__check_db_existence()
 
         self.__initialize_main_window()
 
-
         self.__initialize_password_list_frame()
 
+        self.dc = DatabaseConnection()
 
         self.__fill_listbox()
 
@@ -31,13 +32,19 @@ class App(tk.Tk):
         self.mainloop()
 
 
+    def __check_db_existence(self):
+
+        # If db exists - nothing, else - show WindowIntro
+        ps.WindowIntro()
+
+
     def __initialize_main_window(self):
 
         self.title("Passman")
 
         self.geometry(f"{style.x}x{style.y}")
 
-        self.minsize(style.x, style.y)
+        self.resizable(False, False)
 
         self.eval("tk::PlaceWindow . center")
 
@@ -77,14 +84,12 @@ class App(tk.Tk):
     def __fill_listbox(self):
 
         self.password_list.delete(0, tk.END)
-        
-        db = DatabaseConnection()
 
-        listbox_data = db.fetch_data()
+        listbox_data = self.dc.fetch_data()
 
         for row in listbox_data:
         
-            self.password_list.insert(tk.END, f"{row[0]} {row[1]}")
+            self.password_list.insert(tk.END, f"{row.password_name} {row.password_address}")
 
 
     def __initialize_password_handling_frame(self):
@@ -192,25 +197,25 @@ class App(tk.Tk):
 
     def __delete_password(self):
 
-        return WindowDeletePassword(self)
+        return ps.WindowDeletePassword(self)
 
     
     def __create_new_password_window(self):
 
-        return WindowNewPassword(self)
+        return ps.WindowNewPassword(self)
 
 
     def __get_password(self, *args):
 
         self.password_list_value = self.password_list.get(self.password_list.curselection())
 
-        current_password = self.password_list_value.split()
+        password_data = self.dc.fetch_password_data(self.password_list_value)[0]
 
-        SQL_query_password_data = f"SELECT password, password_description FROM passman WHERE password_name = '{current_password[0]}' AND password_address = '{current_password[1]}';"
+        self.password_value.set(password_data.password)
 
-        db = DatabaseConnection()
+        self.password_description.delete("1.0", tk.END)
 
-        db.fetch_password_data(SQL_query_password_data, self.password_value, self.password_description)
+        self.password_description.insert(tk.END, password_data.password_description)
 
         self.button_update_password.config(state="normal")
 
@@ -231,17 +236,9 @@ class App(tk.Tk):
 
         else:
 
-            password_list_value = self.password_list.get(self.password_list.curselection()).split(" ")
-
-            db_connection = sqlite3.connect("passman.db")
+            new_password_data = self.password_list.get(self.password_list.curselection())
             
-            cursor = db_connection.cursor()
-            
-            cursor.execute(f"UPDATE passman SET password = '{self.password_value.get()}' WHERE password_name = '{password_list_value[0]}' AND password_address = '{password_list_value[1]}';")
-
-            db_connection.commit()
-
-            del db_connection
+            self.dc.update_password_data(new_password_data, self.password_value.get())
 
             self.password_field.config(state="disabled")
 

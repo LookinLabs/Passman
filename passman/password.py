@@ -1,9 +1,24 @@
 import tkinter as tk
-import sqlite3
 import style
 from widget_generators import *
 from database import DatabaseConnection
 import helper_functions
+
+
+class WindowIntro(tk.Toplevel):
+
+    def __init__(self):
+
+        super().__init__()
+        
+        self.welcome_label = LabelGenerator(
+        master=self,
+        text="Meet Passman!",
+        x=style.x_margin, 
+        y=style.y_label_password_field,
+    )
+
+
 
 
 class WindowNewPassword(tk.Toplevel):
@@ -156,17 +171,7 @@ class WindowNewPassword(tk.Toplevel):
 
         password_description_value = self.new_password_field.get()
 
-        new_password_data = [(password_address_value, password_name_value, password_field_value, password_description_value)]
-
-        connection = sqlite3.connect("passman.db")
-
-        cursor = connection.cursor()
-
-        cursor.executemany("INSERT INTO passman (password_address, password_name, password, password_description) VALUES (?,?,?,?)", new_password_data)
-
-        connection.commit()
-
-        connection.close()
+        self.parent.dc.add_password(password_address_value, password_name_value, password_field_value, password_description_value)
 
         self.parent.password_list.insert(tk.END, password_name_value + " " + password_address_value)
 
@@ -233,21 +238,13 @@ class WindowDeletePassword():
 
         password_values_list = self.parent.password_list_value.split()
         
-        connection = sqlite3.connect("passman.db")
-
-        cursor = connection.cursor()
+        self.parent.dc.delete_password(password_values_list[0], password_values_list[1])
         
-        cursor.execute(f"DELETE FROM passman WHERE password_name = '{password_values_list[0]}' AND password_address = '{password_values_list[1]}';")
-
-        connection.commit()
-        
-        listbox_data = cursor.execute("SELECT password_name, password_address FROM passman;")
+        listbox_data = self.parent.dc.fetch_data()
 
         for row in listbox_data:
         
             self.parent.password_list.insert(tk.END, f"{row[0]} {row[1]}")
-        
-        connection.close()
 
         self.notification_window = NotificationGenerator(text="Password successfully deleted!")
 
