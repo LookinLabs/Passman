@@ -7,16 +7,37 @@ import helper_functions
 
 class WindowIntro(tk.Toplevel):
 
-    def __init__(self):
+    def __init__(self, parent):
 
-        super().__init__()
+        super().__init__(parent)
+
+        self.parent = parent
         
         self.welcome_label = LabelGenerator(
-        master=self,
-        text="Meet Passman!",
-        x=style.x_margin, 
-        y=style.y_label_password_field,
+            master=self,
+            text="Meet Passman!",
+            x=style.x_margin, 
+            y=style.y_label_password_field,
+
     )
+        self.set_password_button = ButtonGenerator(
+            master=self,
+            text="Enter",
+            command=self.__close_window,
+            x=style.x_margin,
+            y=style.y_password_description,
+            width=style.width_button,
+            height=style.height_button
+        )
+
+
+    def __close_window(self):
+
+        self.parent.attributes("-alpha", 1)
+
+        self.destroy()
+
+    # It should check if Database password has already been set
 
 
 

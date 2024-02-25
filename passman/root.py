@@ -35,7 +35,9 @@ class App(tk.Tk):
     def __check_db_existence(self):
 
         # If db exists - nothing, else - show WindowIntro
-        ps.WindowIntro()
+        self.attributes("-alpha", 0)
+
+        ps.WindowIntro(self)
 
 
     def __initialize_main_window(self):
