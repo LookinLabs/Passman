@@ -10,12 +10,9 @@ class DatabaseConnection:
 
     def create_passwords_table(self):
 
-        try:
-            md.db.create_tables([md.Password])
+        if not md.db_key:
 
-        except:
-
-            print("Such table already exists")
+            pass
 
 
     def check_db_password(self):
