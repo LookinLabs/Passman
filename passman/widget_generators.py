@@ -1,6 +1,4 @@
-import style
 import tkinter as tk
-from tkinter import ttk
 
 
 class ButtonGenerator(tk.Button):
@@ -75,18 +73,18 @@ class NotificationGenerator(tk.Toplevel):
         self.message_label = LabelGenerator(
             master=self,
             text=text,
-            x=style.x_label_message,
-            y=style.y_label_message,
+            x=320 / 2 - 300 / 2,
+            y=10,
         )
 
         self.message_button = ButtonGenerator(
             master=self,
             text="Ok",
             command=self.destroy,
-            x=style.x_button_message,
-            y=style.y_button_message,
-            width=style.width_button, 
-            height=style.height_button)
+            x=320 / 2 - 50 / 2,
+            y=100,
+            width=50, 
+            height=24)
         
     
     def __del__(self):
@@ -102,7 +100,7 @@ class ConfirmationGenerator(tk.Toplevel):
 
         self.title(title)
 
-        self.minsize(width=style.x_window_password_delete, height=style.y_window_password_delete)
+        self.minsize(width=380, height=200)
 
         self.geometry(f"300x200+400+400")
 

@@ -1,6 +1,5 @@
 import tkinter as tk
 import sqlite3
-import style
 from widget_generators import *
 from database import DatabaseConnection
 import helper_functions
@@ -15,13 +14,13 @@ class WindowNewPassword(tk.Toplevel):
         self.title("New password")
 
         self.geometry(
-            f"{style.x_window_password_new}x{style.y_window_password_new}")
+            f"{320}x{400}")
         
         self.resizable(False, False)
 
         self.parent = parent
 
-        self.geometry("+%d+%d" %(self.parent.winfo_x() // 4 +style.x_window_password_new, self.parent.winfo_y() // 4 +style.y_window_password_new))
+        self.geometry("+%d+%d" %(self.parent.winfo_x() // 4 + 320, self.parent.winfo_y() // 4 + 400))
 
         self.new_password_address = tk.StringVar()
         
@@ -40,8 +39,8 @@ class WindowNewPassword(tk.Toplevel):
             master=self,
             text="Enter your password's address:",
             font=("Times New Roman", 12),
-            x=style.x_margin,
-            y=style.y_margin
+            x=5,
+            y=5
         )
 
 
@@ -49,9 +48,9 @@ class WindowNewPassword(tk.Toplevel):
             master=self,
             show="",
             textvariable=self.new_password_address,
-            width=style.width_password_field,
-            x=style.x_margin,
-            y=style.y_new_password_address
+            width=24,
+            x=5,
+            y=5 + 20
         )
 
 
@@ -59,8 +58,8 @@ class WindowNewPassword(tk.Toplevel):
             master=self,
             text="Enter your password's name:",
             font=("Times New Roman", 12),
-            x=style.x_margin,
-            y=style.y_label_new_password_name
+            x=5,
+            y=5 + 20 * 2
         )
 
 
@@ -68,9 +67,9 @@ class WindowNewPassword(tk.Toplevel):
             master=self,
             show="",
             textvariable=self.new_password_name,
-            width=style.width_password_field,
-            x=style.x_margin,
-            y=style.y_new_password_name
+            width=24,
+            x=5,
+            y=5 + 20 * 2 + 20
         )
 
 
@@ -78,18 +77,18 @@ class WindowNewPassword(tk.Toplevel):
             master=self, 
             text="Enter your password:",
             font=("Times New Roman", 12),
-            x=style.x_margin,
-            y=style.y_label_new_password
+            x=5,
+            y=(5 + 20) * 2 + 20 * 2
         )
 
 
         self.new_password_field = EntryGenerator(
             master=self,
             textvariable=self.new_password_field,
-            width=style.width_password_field,
+            width=24,
             show="*",
-            x=style.x_margin,
-            y=style.y_new_password_field
+            x=5,
+            y=5 + 20 * 2 + 20 * 2 + 20
         )
 
 
@@ -97,16 +96,16 @@ class WindowNewPassword(tk.Toplevel):
             master=self,
             text="Description:",
             font=("Times New Roman", 12),
-            x=style.x_margin, 
-            y=style.y_new_password_description_label
+            x=5, 
+            y=5 + 20 * 2 + 20 * 2 + 20 + 25 + 25 + 20
         )
 
 
         self.new_password_description = TextGenerator(
             master=self,
-            width=style.width_password_field,
-            x=style.x_margin,
-            y=style.y_new_password_description
+            width=24,
+            x=5,
+            y=5 + 20 * 2 + 20 * 2 + 20 + 25 + 25 + 20
         )
 
 
@@ -114,10 +113,10 @@ class WindowNewPassword(tk.Toplevel):
             master=self,
             text="Save",
             command=self.__save_new_password,
-            x=style.x_margin,
-            y=style.y_button_save_new_password,
-            width=style.width_button,
-            height=style.height_button
+            x=5,
+            y=5 + 20 * 2 + 20 * 2 + 20 + 25,
+            width=50,
+            height=24
         )
 
 
@@ -125,10 +124,10 @@ class WindowNewPassword(tk.Toplevel):
             master=self,
             text="Cancel",
             command=self.__cancel_new_password,
-            x=style.x_button_cancel_new_password,
-            y=style.y_button_save_new_password,
-            width=style.width_button,
-            height=style.height_button
+            x=5 + 55,
+            y=5 + 20 * 2 + 20 * 2 + 20 + 25,
+            width=50,
+            height=24
         )
 
 
@@ -136,10 +135,10 @@ class WindowNewPassword(tk.Toplevel):
             master=self,
             text="Show",
             command=lambda: helper_functions.toggle_password(self.new_password_field, self.button_show_new_password),
-            x=style.x_button_show_new_password,
-            y=style.y_new_password_field,
-            width=style.width_button,
-            height=style.height_button
+            x=5 + 24 * 9,
+            y=5 + 20 * 2 + 20 * 2 + 20,
+            width=50,
+            height=24
         )
 
 
@@ -202,7 +201,7 @@ class WindowDeletePassword():
             master=self.window_delete_password,
             font=("Times New Roman", 12),
             text=f"Are you sure you want to delete password ''?", # add password description!
-            x=style.x_window_password_delete / 2 - style.width_label_password_delete / 2,
+            x=380 / 2 - 370 / 2,
             y=10,
         )
 
@@ -210,7 +209,7 @@ class WindowDeletePassword():
             master=self.window_delete_password,
             text="Yes!",
             command=self.confirm_password_deletion,
-            x=style.x_margin,
+            x=5,
             y=95, 
             width=50,
             height=25

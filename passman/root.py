@@ -1,5 +1,4 @@
 import tkinter as tk
-import style
 from database import *
 from widget_generators import *
 from password import WindowNewPassword, WindowDeletePassword
@@ -35,9 +34,9 @@ class App(tk.Tk):
 
         self.title("Passman")
 
-        self.geometry(f"{style.x}x{style.y}")
+        self.geometry(f"600x400")
 
-        self.minsize(style.x, style.y)
+        self.minsize(600, 400)
 
         self.eval("tk::PlaceWindow . center")
 
@@ -50,10 +49,10 @@ class App(tk.Tk):
         )
         
         self.frame_password_list.place(
-            x=style.x_margin,
-            y=style.y_margin,
-            width=style.width_password_list,
-            height=style.height_password_list
+            x=5,
+            y=5,
+            width=600 / 2 - 30,
+            height=400 - 10
         )
 
 
@@ -65,11 +64,11 @@ class App(tk.Tk):
             selectbackground="gray",
             activestyle="none",
             height=4,
-            x=style.x_margin,
-            y=style.y_margin,
+            x=5,
+            y=5,
         )
         
-        self.password_list.place(x=style.x_margin, y=style.y_margin, width=style.width_password_list, height=style.height_password_list)
+        self.password_list.place(x=5, y=5, width=600 / 2 - 30, height=400 - 10)
 
         self.password_list.bind("<<ListboxSelect>>", self.__get_password)
 
@@ -89,15 +88,15 @@ class App(tk.Tk):
 
     def __initialize_password_handling_frame(self):
 
-        self.frame_password_handling = tk.ttk.Frame(
+        self.frame_password_handling = tk.Frame(
             master=self,
         )
 
         self.frame_password_handling.place(
-            x=style.x_frame_password_handling,
-            y=style.y_margin,
-            width=style.width_frame_password_handling,
-            height=style.height_frame
+            x=600 / 2 - 10,
+            y=5,
+            width=600 / 2 + 10,
+            height=400 - 5 * 2
         )
 
 
@@ -105,18 +104,18 @@ class App(tk.Tk):
             master=self.frame_password_handling,
             text="Add new password",
             command=self.__create_new_password_window,
-            x=style.x_margin,
-            y=style.y_margin,
+            x=5,
+            y=5,
             width=200,
-            height=style.height_button
+            height=24
         )
 
 
         self.password_field_label = LabelGenerator(
             master=self.frame_password_handling,
             text="Edit password:",
-            x=style.x_margin, 
-            y=style.y_label_password_field,
+            x=5, 
+            y=24 + 20,
         )
 
 
@@ -124,12 +123,12 @@ class App(tk.Tk):
 
         self.password_field = EntryGenerator(
             master=self.frame_password_handling, 
-            width=style.width_password_field, 
+            width=24, 
             show="*",
             state=tk.DISABLED,
             textvariable=self.password_value,
-            x=style.x_margin,
-            y=style.y_password_field
+            x=5,
+            y=24 + 20 + 20
         )
 
         
@@ -138,10 +137,10 @@ class App(tk.Tk):
             text="Delete",
             state="disabled",
             command=self.__delete_password,
-            x=style.x_button_delete_password,
-            y=style.y_password_field,
-            width=style.width_button,
-            height=style.height_button
+            x=24 + 200,
+            y=24 + 20 + 20,
+            width=50,
+            height=24
         )
 
 
@@ -150,10 +149,10 @@ class App(tk.Tk):
             text="Show",
             state="disabled",
             command=lambda: toggle_password(self.password_field, self.button_show_password),
-            x=style.x_margin,
-            y=style.y_button_show_password,
-            width=style.width_button,
-            height=style.height_button
+            x=5,
+            y=24 + 20 + 20 + 40,
+            width=50,
+            height=24
         )
 
 
@@ -162,10 +161,10 @@ class App(tk.Tk):
             text="Edit",
             state="disabled", 
             command=self.__update_password,
-            x=style.x_button_update_password,
-            y=style.y_button_show_password,
-            width=style.width_button,
-            height=style.height_button
+            x=5 + 50 + 20,
+            y=24 + 20 + 20 + 40,
+            width=50,
+            height=24
         )
 
 
@@ -174,8 +173,8 @@ class App(tk.Tk):
         self.password_description = TextGenerator(
             master=self.frame_password_handling,
             width=30,
-            x=style.x_margin,
-            y=style.y_password_description
+            x=5,
+            y=24 + 20 + 20 + 40 + 40
         )
 
 
@@ -183,10 +182,10 @@ class App(tk.Tk):
             master=self.frame_password_handling,
             text="Close",
             command=self.destroy,
-            x=style.x_button_close, 
-            y=style.y_button_close, 
-            width=style.width_window_button_close,
-            height=style.height_window_button_close
+            x=600 / 2 - 200, 
+            y=600 / 2 - 200, 
+            width=150,
+            height=30
         )
 
 

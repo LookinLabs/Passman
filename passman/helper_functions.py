@@ -1,4 +1,3 @@
-import sqlite3
 import tkinter as tk
 
 def toggle_password(entry, button):
