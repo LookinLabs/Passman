@@ -183,7 +183,7 @@ class App(tk.Tk):
             text="Close",
             command=self.destroy,
             x=600 / 2 - 200, 
-            y=600 / 2 - 200, 
+            y=600 / 2, 
             width=150,
             height=30
         )
