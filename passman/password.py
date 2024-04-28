@@ -26,8 +26,10 @@ class WindowNewPassword(tk.Toplevel):
         
         self.new_password_name = tk.StringVar()
 
-        self.new_password_field = tk.StringVar()
+        self.new_password = tk.StringVar()
 
+        self.new_password.trace_add(mode="write", callback=self.__check_new_password)
+        
         self.new_password_description = tk.StringVar()
 
         self.new_password_description.set("")
@@ -84,11 +86,20 @@ class WindowNewPassword(tk.Toplevel):
 
         self.new_password_field = EntryGenerator(
             master=self,
-            textvariable=self.new_password_field,
+            textvariable=self.new_password,
             width=24,
             show="*",
             x=5,
             y=5 + 20 * 2 + 20 * 2 + 20
+        )
+
+
+        self.new_password_security_label = LabelGenerator(
+            master=self,
+            text="",
+            font=("Times New Roman", 12),
+            x=5, 
+            y=5 + 20 * 2 + 20 * 2 + 20 + 25
         )
 
 
@@ -97,7 +108,7 @@ class WindowNewPassword(tk.Toplevel):
             text="Description:",
             font=("Times New Roman", 12),
             x=5, 
-            y=5 + 20 * 2 + 20 * 2 + 20 + 25 + 25 + 20
+            y=5 + 20 * 2 + 20 * 2 + 20 + 25 + 25 + 10
         )
 
 
@@ -105,7 +116,7 @@ class WindowNewPassword(tk.Toplevel):
             master=self,
             width=24,
             x=5,
-            y=5 + 20 * 2 + 20 * 2 + 20 + 25 + 25 + 20
+            y=5 + 20 * 2 + 20 * 2 + 20 + 25 + 25 + 30
         )
 
 
@@ -114,7 +125,7 @@ class WindowNewPassword(tk.Toplevel):
             text="Save",
             command=self.__save_new_password,
             x=5,
-            y=5 + 20 * 2 + 20 * 2 + 20 + 25,
+            y=5 + 20 * 2 + 20 * 2 + 20 + 120,
             width=50,
             height=24
         )
@@ -125,7 +136,7 @@ class WindowNewPassword(tk.Toplevel):
             text="Cancel",
             command=self.__cancel_new_password,
             x=5 + 55,
-            y=5 + 20 * 2 + 20 * 2 + 20 + 25,
+            y=5 + 20 * 2 + 20 * 2 + 20 + 120,
             width=50,
             height=24
         )
@@ -145,13 +156,28 @@ class WindowNewPassword(tk.Toplevel):
         self.mainloop()
 
 
+    def __check_new_password(self, *args):
+
+        password_validation = helper_functions.PasswordValidation()
+        
+        strong_password = password_validation.is_password_valid(self.new_password.get())
+
+        if not strong_password:
+
+            self.new_password_security_label.config(text="Password is weak!!!")
+
+        else:
+
+            self.new_password_security_label.config(text="Password is good.")
+
+
     def __save_new_password(self):
 
         password_address_value = self.new_password_address.get()
 
         password_name_value = self.new_password_name.get()
 
-        password_field_value = self.new_password_field.get()
+        password_field_value = self.new_password.get()
 
         password_description_value = self.new_password_field.get()
 
