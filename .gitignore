@@ -1,5 +1,5 @@
 passman.db
-__pycache__
+passman/__pycache__/
 Lib
 Scripts
 pyvenv.cfg

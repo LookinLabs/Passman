@@ -78,7 +78,7 @@ class WindowNewPassword(tk.Toplevel):
             text="Enter your password:",
             font=("Times New Roman", 12),
             x=5,
-            y=(5 + 20) * 2 + 20 * 2
+            y=5 + 20 * 2 + 20 * 2
         )
 
 
