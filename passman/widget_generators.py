@@ -19,13 +19,14 @@ class ButtonGenerator(tk.Button):
 
 class LabelGenerator(tk.Label):
 
-    def __init__(self, master, x, y, text, font=("Lora", 12)):
+    def __init__(self, master, x, y, text, font=("Lora", 12), foreground="black"):
 
         super().__init__(master)
 
         self.configure(
             text=text, 
-            font=font)
+            font=font,
+            foreground=foreground)
 
         self.place(x=x, y=y)
 

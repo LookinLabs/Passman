@@ -98,6 +98,7 @@ class WindowNewPassword(tk.Toplevel):
             master=self,
             text="",
             font=("Times New Roman", 12),
+            foreground="red",
             x=5, 
             y=5 + 20 * 2 + 20 * 2 + 20 + 25
         )
