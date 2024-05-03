@@ -197,7 +197,7 @@ class PasswordValidation:
         return False
 
 
-    def __is_password_valid(self, new_password: str, old_password: str, name: str, birthdate: str) -> bool:
+    def is_password_valid(self, new_password: str, old_password="") -> bool:
         """
         Check whether the given password is valid.
 
@@ -224,12 +224,15 @@ class PasswordValidation:
 
         difference = self.__is_different_from_old_password(old_password, new_password)
 
-        name_in_password = self.__is_name_in_password(new_password, name)
+        # name_in_password = self.__is_name_in_password(new_password, name)
 
-        birthday = self.__is_birthday_in_password(new_password, birthdate)
+        # birthday = self.__is_birthday_in_password(new_password, birthdate)
 
-        validators = (length, uppercase, lowercase, special, number, difference)
+        validators = (length, uppercase, lowercase, special, number,) # difference
 
-        falsy_validators = (name_in_password, birthday)
+        # falsy_validators = (name_in_password, birthday)
 
-        return all(validators) and not all(falsy_validators)
+        return all(validators)
+    
+
+# add "and not all(falsy_validators)"

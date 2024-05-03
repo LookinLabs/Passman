@@ -68,7 +68,7 @@ class App(tk.Tk):
             y=5,
         )
         
-        self.password_list.place(x=5, y=5, width=600 / 2 - 30, height=400 - 10)
+        self.password_list.place(x=5, y=5, width=600 / 2 - 30, height=400 - 10) # add to the arguments list above
 
         self.password_list.bind("<<ListboxSelect>>", self.__get_password)
 
