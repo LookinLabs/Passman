@@ -169,7 +169,7 @@ class WindowNewPassword(tk.Toplevel):
 
         else:
 
-            self.new_password_security_label.config(text="Password is good.")
+            self.new_password_security_label.config(text="Password is good.", foreground="green")
 
 
     def __save_new_password(self):

@@ -228,7 +228,7 @@ class PasswordValidation:
 
         # birthday = self.__is_birthday_in_password(new_password, birthdate)
 
-        validators = (length, uppercase, lowercase, special, number, difference)
+        validators = (length, uppercase, lowercase, special, number,) # difference
 
         # falsy_validators = (name_in_password, birthday)
 
