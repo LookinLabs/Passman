@@ -98,7 +98,6 @@ class WindowNewPassword(tk.Toplevel):
             master=self,
             text="",
             font=("Times New Roman", 12),
-            foreground="red",
             x=5, 
             y=5 + 20 * 2 + 20 * 2 + 20 + 25
         )
@@ -125,6 +124,7 @@ class WindowNewPassword(tk.Toplevel):
             master=self,
             text="Save",
             command=self.__save_new_password,
+            state=tk.DISABLED,
             x=5,
             y=5 + 20 * 2 + 20 * 2 + 20 + 120,
             width=50,
@@ -165,11 +165,15 @@ class WindowNewPassword(tk.Toplevel):
 
         if not strong_password:
 
-            self.new_password_security_label.config(text="Password is weak!!!")
+            self.new_password_security_label.config(text="Password is weak!!!", foreground="red")
+
+            self.button_save_new_password.config(state=tk.DISABLED)
 
         else:
 
             self.new_password_security_label.config(text="Password is good.", foreground="green")
+
+            self.button_save_new_password.config(state=tk.ACTIVE)
 
 
     def __save_new_password(self):
