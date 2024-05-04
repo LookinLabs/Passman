@@ -54,6 +54,7 @@ class PasswordValidation:
         :param password: Password to be checked
         :return: True if the password contains at least one lowercase letter, False otherwise
         """
+
         for symbol in password:
 
             if symbol.islower():
