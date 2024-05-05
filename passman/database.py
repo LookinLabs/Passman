@@ -45,6 +45,16 @@ class DatabaseConnection:
 
         description_field.insert(tk.END, fetched_data[0][1])
 
+    def fetch_passwords(self):
+
+        SQL_query = "SELECT password FROM passman"
+
+        data = self.cursor.execute(SQL_query)
+
+        fetched_data = data.fetchall()
+
+        return fetched_data
+
     def __del__(self) -> None:
 
         self.connection.close()
