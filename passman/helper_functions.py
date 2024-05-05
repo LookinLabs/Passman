@@ -1,5 +1,6 @@
 import tkinter as tk
 
+
 def toggle_password(entry, button):
 
     if entry["show"] == "*":
@@ -13,7 +14,6 @@ def toggle_password(entry, button):
         entry["show"] = "*"
 
         button.config(text="Show")
-
 
 
 class PasswordValidation:
@@ -30,7 +30,6 @@ class PasswordValidation:
 
         return password_length >= 8 and password_length <= 64
 
-
     def __includes_uppercase(self, password: str) -> bool:
         """
         Check if the password contains at least one uppercase letter.
@@ -45,7 +44,6 @@ class PasswordValidation:
                 return True
 
         return False
-
 
     def __includes_lowercase(self, password: str) -> bool:
         """
@@ -63,7 +61,6 @@ class PasswordValidation:
 
         return False
 
-
     def __includes_special(self, password: str) -> bool:
         """
         Check if the password contains at least one special character (whitespace is also considered a special character).
@@ -79,7 +76,6 @@ class PasswordValidation:
 
         return False
 
-
     def __includes_number(self, password: str) -> bool:
         """
         Check if the password contains at least one numeric digit.
@@ -94,7 +90,6 @@ class PasswordValidation:
                 return True
 
         return False
-
 
     def __is_different_from_old_password(self, old_pass: str, new_pass: str) -> bool:
         """
@@ -125,7 +120,6 @@ class PasswordValidation:
                 return False
 
         return True
-
 
     def __is_name_in_password(self, password: str, name: str) -> bool:
         """
@@ -158,7 +152,6 @@ class PasswordValidation:
                 return True
 
         return False
-
 
     def __is_birthday_in_password(self, password: str, birthdate: str) -> bool:
         """
@@ -197,7 +190,6 @@ class PasswordValidation:
 
         return False
 
-
     def is_password_valid(self, new_password: str, old_password="") -> bool:
         """
         Check whether the given password is valid.
@@ -229,11 +221,17 @@ class PasswordValidation:
 
         # birthday = self.__is_birthday_in_password(new_password, birthdate)
 
-        validators = (length, uppercase, lowercase, special, number,) # difference
+        validators = (
+            length,
+            uppercase,
+            lowercase,
+            special,
+            number,
+        )  # difference
 
         # falsy_validators = (name_in_password, birthday)
 
         return all(validators)
-    
+
 
 # add "and not all(falsy_validators)"

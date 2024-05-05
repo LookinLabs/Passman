@@ -3,6 +3,8 @@
 Passman is an app for secure local password storage, written (for now!) with Tkinter default Python module. It's still in development phase.
 Potentially, t should include an opportunity to store passwords, connect to local networks, share unique identificator of its instance and share the passwords with other devices if an entered password is valid, have a possibility to generate random secure password, search by site name and password values, control if some passwords similarity
 
+This code uses Yapf Python formatting tool with custom modifications. See [this repo](https://github.com/google/yapf) for more information
+
 ## Collaborate with your team
 
 - [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)

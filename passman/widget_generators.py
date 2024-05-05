@@ -10,8 +10,9 @@ class ButtonGenerator(tk.Button):
         self.configure(
             text=text,
             state=state,
-            font=("Arial", 12),
-            command=command #WindowNewPassword
+            font=( "Arial",
+                   12 ),
+            command=command  #WindowNewPassword
         )
 
         self.place(x=x, y=y, width=width, height=height)
@@ -19,20 +20,16 @@ class ButtonGenerator(tk.Button):
 
 class LabelGenerator(tk.Label):
 
-    def __init__(self, master, x, y, text, font=("Lora", 12), foreground="black"):
+    def __init__(self, master, x, y, text, font=( "Lora", 12 ), foreground="black"):
 
         super().__init__(master)
 
-        self.configure(
-            text=text, 
-            font=font,
-            foreground=foreground)
+        self.configure(text=text, font=font, foreground=foreground)
 
         self.place(x=x, y=y)
 
 
 class EntryGenerator(tk.Entry):
-        
 
     def __init__(self, master, width, show, textvariable, x, y, state="normal"):
 
@@ -86,10 +83,10 @@ class NotificationGenerator(tk.Toplevel):
             command=self.destroy,
             x=320 / 2 - 50 / 2,
             y=100,
-            width=50, 
-            height=24)
-        
-    
+            width=50,
+            height=24
+        )
+
     def __del__(self):
 
         self.grab_release()
@@ -98,7 +95,7 @@ class NotificationGenerator(tk.Toplevel):
 class ConfirmationGenerator(tk.Toplevel):
 
     def __init__(self, title):
-        
+
         super().__init__()
 
         self.title(title)
@@ -109,7 +106,6 @@ class ConfirmationGenerator(tk.Toplevel):
 
         self.grab_set()
 
-    
     def __del__(self):
 
         self.grab_release()

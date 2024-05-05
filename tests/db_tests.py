@@ -7,12 +7,19 @@ def test_data_addition():
 
     cursor = connection.cursor()
 
-    passwords = [
-                ("hh.ee", "haha", "12345678", "this password's description"),
-                ("asdfg.com", "asdfg", "123412", "other description")
-            ]
+    passwords = [( "hh.ee",
+                   "haha",
+                   "12345678",
+                   "this password's description"),
+                 ( "asdfg.com",
+                   "asdfg",
+                   "123412",
+                   "other description")]
 
-    cursor.executemany("INSERT INTO passman (password_address, password_name, password, password_description) VALUES (?,?,?,?)", passwords)
+    cursor.executemany(
+        "INSERT INTO passman (password_address, password_name, password, password_description) VALUES (?,?,?,?)",
+        passwords
+    )
 
     connection.commit()
 
@@ -32,6 +39,7 @@ def test_data_presence():
         print(row)
 
     connection.close()
+
 
 # test_data_addition()
 
