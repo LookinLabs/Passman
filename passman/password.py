@@ -199,16 +199,20 @@ class WindowNewPassword(tk.Toplevel):
 
         new_password = self.new_password.get()
 
-        if new_password in passwords:
+        for password_tuple in passwords:
 
-            self.new_password_security_label.config(
-                text="You already have such password.",
-                foreground="yellow"
-            )
+            if new_password == password_tuple[0]:
+
+                self.new_password_uniqueness_label.config(
+                    text="You already have such password.",
+                    foreground="yellow"
+                )
+
+                break
 
         else:
 
-            self.new_password_security_label.config(text="", )
+            self.new_password_uniqueness_label.config(text="", )
 
     def __validate_new_password(self):
 
