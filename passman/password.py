@@ -89,10 +89,14 @@ class WindowNewPassword(tk.Toplevel):
             y=5 + 20 * 2 + 20 * 2
         )
 
+        self.get_passwords = (self.register(self.__get_passwords_list))
+
         self.new_password_field = EntryGenerator(
             master=self,
             textvariable=self.new_password,
             width=24,
+            validate="focus",
+            validatecommand=self.get_passwords,
             show="*",
             x=5,
             y=5 + 20 * 2 + 20 * 2 + 20
@@ -191,15 +195,17 @@ class WindowNewPassword(tk.Toplevel):
 
             self.button_save_new_password.config(state=tk.ACTIVE)
 
-    def __check_password_uniqueness(self, *args):
+    def __get_passwords_list(self, *args):
 
         db = DatabaseConnection()
 
-        passwords = db.fetch_passwords()
+        self.passwords = db.fetch_passwords()
+
+    def __check_password_uniqueness(self, *args):
 
         new_password = self.new_password.get()
 
-        for password_tuple in passwords:
+        for password_tuple in self.passwords:
 
             if new_password == password_tuple[0]:
 
