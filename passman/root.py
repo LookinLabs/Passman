@@ -1,5 +1,6 @@
 import tkinter as tk
-from database import *
+import sqlite3
+from database import DatabaseConnection
 from widget_generators import *
 from password import WindowNewPassword, WindowDeletePassword
 from helper_functions import toggle_password

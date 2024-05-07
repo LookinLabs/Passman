@@ -31,7 +31,18 @@ class LabelGenerator(tk.Label):
 
 class EntryGenerator(tk.Entry):
 
-    def __init__(self, master, width, show, textvariable, x, y, state="normal"):
+    def __init__(
+        self,
+        master,
+        width,
+        show,
+        textvariable,
+        x,
+        y,
+        state="normal",
+        validate="none",
+        validatecommand=None
+    ):
 
         super().__init__(master)
 
@@ -40,6 +51,8 @@ class EntryGenerator(tk.Entry):
             show=show,
             textvariable=textvariable,
             state=state,
+            validate=validate,
+            validatecommand=validatecommand
         )
 
         self.place(x=x, y=y)

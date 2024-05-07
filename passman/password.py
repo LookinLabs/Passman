@@ -33,6 +33,11 @@ class WindowNewPassword(tk.Toplevel):
 
         self.new_password.trace_add(mode="write", callback=self.__check_new_password)
 
+        self.new_password.trace_add(
+            mode="write",
+            callback=self.__check_password_uniqueness
+        )
+
         self.new_password_description = tk.StringVar()
 
         self.new_password_description.set("")
@@ -84,10 +89,14 @@ class WindowNewPassword(tk.Toplevel):
             y=5 + 20 * 2 + 20 * 2
         )
 
+        self.get_passwords = (self.register(self.__get_passwords_list))
+
         self.new_password_field = EntryGenerator(
             master=self,
             textvariable=self.new_password,
             width=24,
+            validate="focus",
+            validatecommand=self.get_passwords,
             show="*",
             x=5,
             y=5 + 20 * 2 + 20 * 2 + 20
@@ -99,7 +108,16 @@ class WindowNewPassword(tk.Toplevel):
             font=( "Times New Roman",
                    12 ),
             x=5,
-            y=5 + 20 * 2 + 20 * 2 + 20 + 25
+            y=5 + 20 * 2 + 20 * 2 + 20 + 20
+        )
+
+        self.new_password_uniqueness_label = LabelGenerator(
+            master=self,
+            text="",
+            font=( "Times New Roman",
+                   12 ),
+            x=5,
+            y=5 + 20 * 2 + 20 * 2 + 20 + 40
         )
 
         self.new_password_description_label = LabelGenerator(
@@ -176,6 +194,37 @@ class WindowNewPassword(tk.Toplevel):
             )
 
             self.button_save_new_password.config(state=tk.ACTIVE)
+
+    def __get_passwords_list(self, *args):
+
+        db = DatabaseConnection()
+
+        self.passwords = db.fetch_passwords()
+
+    def __check_password_uniqueness(self, *args):
+
+        new_password = self.new_password.get()
+
+        for password_tuple in self.passwords:
+
+            if new_password == password_tuple[0]:
+
+                self.new_password_uniqueness_label.config(
+                    text="You already have such password.",
+                    foreground="yellow"
+                )
+
+                break
+
+        else:
+
+            self.new_password_uniqueness_label.config(text="", )
+
+    def __validate_new_password(self):
+
+        self.__check_new_password()
+
+        self.__check_password_uniqueness()
 
     def __save_new_password(self):
 
