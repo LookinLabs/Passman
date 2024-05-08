@@ -46,6 +46,13 @@ class App(tk.Tk):
 
         self.password_filter_value = tk.StringVar()
 
+        self.password_filter_value.add_trace(
+            mode="write",
+            callback=self.__filter_passwords
+        )
+
+        # add password_name and address retrieval and update validate argument
+
         self.password_search = EntryGenerator(
             master=self.frame_password_list,
             width=40,
@@ -91,6 +98,10 @@ class App(tk.Tk):
         for row in listbox_data:
 
             self.password_list.insert(tk.END, f"{row[0]} {row[1]}")
+
+    def __filter_passwords(self):
+
+        filter_value = self.password_filter_value.get()
 
     def __initialize_password_handling_frame(self):
 
