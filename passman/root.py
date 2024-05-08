@@ -44,27 +44,6 @@ class App(tk.Tk):
 
         self.frame_password_list.place(x=5, y=5, width=600 / 2 - 30, height=400 - 10)
 
-        self.password_filter_value = tk.StringVar()
-
-        self.password_filter_value.add_trace(
-            mode="write",
-            callback=self.__filter_passwords
-        )
-
-        # add password_name and address retrieval and update validate argument
-
-        self.password_search = EntryGenerator(
-            master=self.frame_password_list,
-            width=40,
-            foreground="gray",
-            validate="focus",
-            textvariable=self.password_filter_value,
-            x=5,
-            y=5
-        )
-
-        self.password_search.insert(0, "Search password...")
-
         self.password_list = tk.Listbox(
             master=self.frame_password_list,
             selectmode=tk.SINGLE,
@@ -77,6 +56,28 @@ class App(tk.Tk):
             x=5,
             y=5,
         )
+
+        self.password_filter_value = tk.StringVar()
+
+        self.password_filter_value.trace_add(
+            mode="write",
+            callback=self.__filter_passwords
+        )
+
+        self.get_filter_focus = (self.register(self.__start_filtering))
+
+        self.password_search = EntryGenerator(
+            master=self.frame_password_list,
+            width=40,
+            foreground="gray",
+            validate="focus",
+            validatecommand=self.get_filter_focus,
+            textvariable=self.password_filter_value,
+            x=5,
+            y=5
+        )
+
+        self.password_search.insert(0, "Search password...")
 
         self.password_list.place(
             x=5,
@@ -99,9 +100,19 @@ class App(tk.Tk):
 
             self.password_list.insert(tk.END, f"{row[0]} {row[1]}")
 
-    def __filter_passwords(self):
+    def __start_filtering(self):
+
+        self.password_search.delete(0, tk.END)
+
+        self.password_search.configure(foreground="black")
+
+        # write functionality to get passwords data from the list (the function below)
+
+    def __filter_passwords(self, *args):
 
         filter_value = self.password_filter_value.get()
+
+        print(self.password_list.get(0, tk.END))
 
     def __initialize_password_handling_frame(self):
 
