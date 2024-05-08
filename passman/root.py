@@ -44,6 +44,20 @@ class App(tk.Tk):
 
         self.frame_password_list.place(x=5, y=5, width=600 / 2 - 30, height=400 - 10)
 
+        self.password_filter_value = tk.StringVar()
+
+        self.password_search = EntryGenerator(
+            master=self.frame_password_list,
+            width=40,
+            foreground="gray",
+            validate="focus",
+            textvariable=self.password_filter_value,
+            x=5,
+            y=5
+        )
+
+        self.password_search.insert(0, "Search password...")
+
         self.password_list = tk.Listbox(
             master=self.frame_password_list,
             selectmode=tk.SINGLE,
@@ -59,9 +73,9 @@ class App(tk.Tk):
 
         self.password_list.place(
             x=5,
-            y=5,
+            y=35,
             width=600 / 2 - 30,
-            height=400 - 10
+            height=400 - 40
         )  # add to the arguments list above
 
         self.password_list.bind("<<ListboxSelect>>", self.__get_password)

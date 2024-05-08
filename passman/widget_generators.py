@@ -35,10 +35,11 @@ class EntryGenerator(tk.Entry):
         self,
         master,
         width,
-        show,
         textvariable,
         x,
         y,
+        foreground="black",
+        show="",
         state="normal",
         validate="none",
         validatecommand=None
@@ -49,6 +50,7 @@ class EntryGenerator(tk.Entry):
         self.configure(
             width=width,
             show=show,
+            foreground=foreground,
             textvariable=textvariable,
             state=state,
             validate=validate,
