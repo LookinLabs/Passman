@@ -112,7 +112,21 @@ class App(tk.Tk):
 
         filter_value = self.password_filter_value.get()
 
-        print(self.password_list.get(0, tk.END))
+        list_data = [self.password_list.get(0, tk.END)]
+
+        self.password_list.delete(0, tk.END)
+
+        # Wtf
+
+        for row in list_data:
+
+            row_divided = row.split(" ")
+
+            print(filter_value, "-", row_divided[0], row_divided[1])
+
+            if filter_value in row_divided[0] or row_divided[1]:
+
+                self.password_list.insert(tk.END, f"{row_divided[0]} {row_divided[1]}")
 
     def __initialize_password_handling_frame(self):
 
