@@ -65,16 +65,26 @@ class App(tk.Tk):
 
         self.password_search = EntryGenerator(
             master=self.frame_password_list,
-            width=40,
             foreground="gray",
             validate="focus",
             validatecommand=self.get_filter_focus,
             textvariable=self.password_filter_value,
             x=5,
-            y=5
+            y=5,
+            width=28,
         )
 
         self.password_search.insert(0, "Search password...")
+
+        self.button_clear_search = ButtonGenerator(
+            master=self.frame_password_list,
+            text="X",
+            command=lambda: print("x"),
+            x=242,
+            y=5,
+            width=26,
+            height=23
+        )
 
         self.password_list.place(
             x=5,
@@ -127,7 +137,7 @@ class App(tk.Tk):
         print(
             self.password_list.get(0,
                                    tk.END)
-        )  # - check items in list after filtering
+        )  # - add 'return list' after filter cancellation
 
     def __initialize_password_handling_frame(self):
 
