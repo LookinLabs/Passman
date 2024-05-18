@@ -79,7 +79,7 @@ class App(tk.Tk):
         self.button_clear_search = ButtonGenerator(
             master=self.frame_password_list,
             text="X",
-            command=lambda: print("x"),
+            command=self.__disable_filter,
             x=242,
             y=5,
             width=26,
@@ -138,6 +138,14 @@ class App(tk.Tk):
             self.password_list.get(0,
                                    tk.END)
         )  # - add 'return list' after filter cancellation
+
+    def __disable_filter(self):
+
+        self.password_search.delete(0, tk.END)
+
+        self.focus()
+
+        self.__fill_listbox()
 
     def __initialize_password_handling_frame(self):
 
