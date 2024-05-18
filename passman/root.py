@@ -57,11 +57,40 @@ class App(tk.Tk):
             y=5,
         )
 
-        self.password_list.place(
+        self.password_filter_value = tk.StringVar()
+
+        self.list_data = list()
+
+        self.get_filter_focus = (self.register(self.__start_filtering))
+
+        self.password_search = EntryGenerator(
+            master=self.frame_password_list,
+            foreground="gray",
+            validate="focus",
+            validatecommand=self.get_filter_focus,
+            textvariable=self.password_filter_value,
             x=5,
             y=5,
+            width=28,
+        )
+
+        self.password_search.insert(0, "Search password...")
+
+        self.button_clear_search = ButtonGenerator(
+            master=self.frame_password_list,
+            text="X",
+            command=self.__disable_filter,
+            x=242,
+            y=5,
+            width=26,
+            height=23
+        )
+
+        self.password_list.place(
+            x=5,
+            y=35,
             width=600 / 2 - 30,
-            height=400 - 10
+            height=400 - 40
         )  # add to the arguments list above
 
         self.password_list.bind("<<ListboxSelect>>", self.__get_password)
@@ -77,6 +106,46 @@ class App(tk.Tk):
         for row in listbox_data:
 
             self.password_list.insert(tk.END, f"{row[0]} {row[1]}")
+
+    def __start_filtering(self):
+
+        self.password_search.delete(0, tk.END)
+
+        self.password_search.configure(foreground="black")
+
+        self.list_data = [ password for password in self.password_list.get(0, tk.END) ]
+
+        self.password_filter_value.trace_add(
+            mode="write",
+            callback=self.__filter_passwords
+        )
+
+    def __filter_passwords(self, *args):
+
+        filter_value = self.password_filter_value.get()
+
+        self.password_list.delete(0, tk.END)
+
+        for row in self.list_data:
+
+            row_divided = row.split(" ")
+
+            if filter_value in row_divided[0] or filter_value in row_divided[1]:
+
+                self.password_list.insert(tk.END, f"{row_divided[0]} {row_divided[1]}")
+
+        print(
+            self.password_list.get(0,
+                                   tk.END)
+        )  # - add 'return list' after filter cancellation
+
+    def __disable_filter(self):
+
+        self.password_search.delete(0, tk.END)
+
+        self.focus()
+
+        self.__fill_listbox()
 
     def __initialize_password_handling_frame(self):
 
