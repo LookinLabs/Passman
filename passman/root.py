@@ -59,10 +59,7 @@ class App(tk.Tk):
 
         self.password_filter_value = tk.StringVar()
 
-        self.password_filter_value.trace_add(
-            mode="write",
-            callback=self.__filter_passwords
-        )
+        self.list_data = list()
 
         self.get_filter_focus = (self.register(self.__start_filtering))
 
@@ -106,27 +103,31 @@ class App(tk.Tk):
 
         self.password_search.configure(foreground="black")
 
-        # write functionality to get passwords data from the list (the function below)
+        self.list_data = [ password for password in self.password_list.get(0, tk.END) ]
+
+        self.password_filter_value.trace_add(
+            mode="write",
+            callback=self.__filter_passwords
+        )
 
     def __filter_passwords(self, *args):
 
         filter_value = self.password_filter_value.get()
 
-        list_data = [self.password_list.get(0, tk.END)]
-
         self.password_list.delete(0, tk.END)
 
-        # Wtf
-
-        for row in list_data:
+        for row in self.list_data:
 
             row_divided = row.split(" ")
 
-            print(filter_value, "-", row_divided[0], row_divided[1])
-
-            if filter_value in row_divided[0] or row_divided[1]:
+            if filter_value in row_divided[0] or filter_value in row_divided[1]:
 
                 self.password_list.insert(tk.END, f"{row_divided[0]} {row_divided[1]}")
+
+        print(
+            self.password_list.get(0,
+                                   tk.END)
+        )  # - check items in list after filtering
 
     def __initialize_password_handling_frame(self):
 
