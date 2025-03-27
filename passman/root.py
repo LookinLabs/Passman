@@ -9,14 +9,14 @@ from helper_functions import toggle_password
 class App(tk.Tk):
 
     def __init__(self):
+        
 
-        #running the app
         super().__init__()
 
         self.__initialize_main_window()
 
         self.__initialize_password_list_frame()
-
+        
         self.__fill_listbox()
 
         self.password_value_index = 0
@@ -27,28 +27,20 @@ class App(tk.Tk):
 
     def __initialize_main_window(self):
 
+
         self.title("Passman")
-
         self.geometry(f"600x400")
-
         self.minsize(600, 400)
-
         self.eval("tk::PlaceWindow . center")
 
     def __initialize_password_list_frame(self):
-
-        self.frame_password_list = tk.Frame(
-            master=self,
-            bd=3,
-        )
-
+        self.frame_password_list = tk.Frame(master=self, bd=3)
         self.frame_password_list.place(x=5, y=5, width=600 / 2 - 30, height=400 - 10)
 
         self.password_list = tk.Listbox(
             master=self.frame_password_list,
             selectmode=tk.SINGLE,
-            font=( "Times New Roman",
-                   12 ),
+            font=("Times New Roman", 12),
             bg="gray96",
             selectbackground="gray",
             activestyle="none",
@@ -61,7 +53,8 @@ class App(tk.Tk):
 
         self.list_data = list()
 
-        self.get_filter_focus = (self.register(self.__start_filtering))
+        self.get_filter_focus = self.register(self.__start_filtering)
+
 
         self.password_search = EntryGenerator(
             master=self.frame_password_list,
@@ -83,22 +76,18 @@ class App(tk.Tk):
             x=242,
             y=5,
             width=26,
-            height=23
+            height=23,
         )
 
         self.password_list.place(
-            x=5,
-            y=35,
-            width=600 / 2 - 30,
-            height=400 - 40
-        )  # add to the arguments list above
+            x=5, y=35, width=600 / 2 - 30, height=400 - 40
+        )
 
         self.password_list.bind("<<ListboxSelect>>", self.__get_password)
 
     def __fill_listbox(self):
 
         self.password_list.delete(0, tk.END)
-
         db = DatabaseConnection()
 
         listbox_data = db.fetch_data()
@@ -110,52 +99,39 @@ class App(tk.Tk):
     def __start_filtering(self):
 
         self.password_search.delete(0, tk.END)
-
         self.password_search.configure(foreground="black")
 
         self.list_data = [ password for password in self.password_list.get(0, tk.END) ]
 
         self.password_filter_value.trace_add(
-            mode="write",
-            callback=self.__filter_passwords
+            mode="write",             callback=self.__filter_passwords
         )
 
     def __filter_passwords(self, *args):
 
         filter_value = self.password_filter_value.get()
-
         self.password_list.delete(0, tk.END)
 
         for row in self.list_data:
 
+
             row_divided = row.split(" ")
 
             if filter_value in row_divided[0] or filter_value in row_divided[1]:
-
                 self.password_list.insert(tk.END, f"{row_divided[0]} {row_divided[1]}")
 
-        print(
-            self.password_list.get(0,
-                                   tk.END)
-        )  # - add 'return list' after filter cancellation
-
     def __disable_filter(self):
-
         self.password_search.delete(0, tk.END)
+
 
         self.focus()
 
         self.__fill_listbox()
 
     def __initialize_password_handling_frame(self):
-
-        self.frame_password_handling = tk.Frame(master=self, )
-
+        self.frame_password_handling = tk.Frame(master=self)
         self.frame_password_handling.place(
-            x=600 / 2 - 10,
-            y=5,
-            width=600 / 2 + 10,
-            height=400 - 5 * 2
+            x=600 / 2 - 10, y=5, width=600 / 2 + 10, height=400 - 5 * 2
         )
 
         self.button_add_new_password = ButtonGenerator(
@@ -165,7 +141,7 @@ class App(tk.Tk):
             x=5,
             y=5,
             width=200,
-            height=24
+            height=24,
         )
 
         self.password_field_label = LabelGenerator(
@@ -184,7 +160,7 @@ class App(tk.Tk):
             state=tk.DISABLED,
             textvariable=self.password_value,
             x=5,
-            y=24 + 20 + 20
+            y=24 + 20 + 20,
         )
 
         self.button_delete_password = ButtonGenerator(
@@ -195,20 +171,20 @@ class App(tk.Tk):
             x=24 + 200,
             y=24 + 20 + 20,
             width=50,
-            height=24
+            height=24,
         )
 
         self.button_show_password = ButtonGenerator(
             master=self.frame_password_handling,
             text="Show",
             state="disabled",
-            command=lambda:
-            toggle_password(self.password_field,
-                            self.button_show_password),
+            command=lambda: toggle_password(
+                self.password_field, self.button_show_password
+            ),
             x=5,
             y=24 + 20 + 20 + 40,
             width=50,
-            height=24
+            height=24,
         )
 
         self.button_update_password = ButtonGenerator(
@@ -219,7 +195,7 @@ class App(tk.Tk):
             x=5 + 50 + 20,
             y=24 + 20 + 20 + 40,
             width=50,
-            height=24
+            height=24,
         )
 
         self.password_description = tk.StringVar()
@@ -228,7 +204,7 @@ class App(tk.Tk):
             master=self.frame_password_handling,
             width=30,
             x=5,
-            y=24 + 20 + 20 + 40 + 40
+            y=24 + 20 + 20 + 40 + 40,
         )
 
         self.button_close_window = ButtonGenerator(
@@ -238,11 +214,10 @@ class App(tk.Tk):
             x=600 / 2 - 200,
             y=600 / 2,
             width=150,
-            height=30
+            height=30,
         )
 
     def __delete_password(self):
-
         return WindowDeletePassword(self)
 
     def __create_new_password_window(self):
@@ -250,7 +225,6 @@ class App(tk.Tk):
         return WindowNewPassword(self)
 
     def __get_password(self, *args):
-
         self.password_list_value = self.password_list.get(
             self.password_list.curselection()
         )
@@ -263,26 +237,22 @@ class App(tk.Tk):
 
         db.fetch_password_data(
             SQL_query_password_data,
+            (current_password[0], current_password[1]),
             self.password_value,
-            self.password_description
+            self.password_description,
         )
 
         self.button_update_password.config(state="normal")
 
         self.button_show_password.config(state="normal")
-
         self.button_delete_password.config(state="normal")
 
     def __update_password(self):
-
         if self.password_field["state"] == "disabled":
-
             self.button_delete_password.config(state="disabled")
-
             self.password_field.config(state="normal")
 
             self.button_update_password.config(text="Update")
-
         else:
 
             password_list_value = self.password_list.get(
@@ -293,18 +263,17 @@ class App(tk.Tk):
 
             cursor = db_connection.cursor()
 
+
             cursor.execute(
                 f"UPDATE passman SET password = '{self.password_value.get()}' WHERE password_name = '{password_list_value[0]}' AND password_address = '{password_list_value[1]}';"
             )
 
             db_connection.commit()
-
-            del db_connection
+            db_connection.close()
 
             self.password_field.config(state="disabled")
 
             self.button_delete_password.config(state="normal")
-
             self.button_update_password.config(text="Edit")
 
 
