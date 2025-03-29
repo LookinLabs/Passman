@@ -27,9 +27,8 @@ class App(tk.Tk):
 
     def __initialize_main_window(self):
 
-
         self.title("Passman")
-        self.geometry(f"600x400")
+        self.geometry(f"800x600")
         self.minsize(600, 400)
         self.eval("tk::PlaceWindow . center")
 

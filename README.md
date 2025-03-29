@@ -1,5 +1,11 @@
 # Passman
 
+## Useful Links
+
+**[Browser debugging](https://code.visualstudio.com/docs/nodejs/browser-debugging#_open-link-command)**
+
+**[How to develop browser extensions Reddit thread](https://www.reddit.com/r/learnprogramming/comments/uqw8gz/how_to_develop_browser_extensions/)**
+
 Passman is an app for secure local password storage, written (for now!) with Tkinter default Python module. It's still in development phase.
 Potentially, t should include an opportunity to store passwords, connect to local networks, share unique identificator of its instance and share the passwords with other devices if an entered password is valid, have a possibility to generate random secure password, search by site name and password values, control if some passwords similarity
 
